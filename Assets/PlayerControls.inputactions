@@ -18,7 +18,7 @@
                     "name": "Sword Swing",
                     "type": "Value",
                     "id": "b0aca02b-b7dc-44b1-a277-08039a9c57d2",
-                    "expectedControlType": "Stick",
+                    "expectedControlType": "Pose",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -170,7 +170,7 @@
                     "name": "",
                     "id": "7f670e5e-948e-4a92-b918-295ddb2e4356",
                     "path": "<Gamepad>/rightStick",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "Gamepad;Keyboard&Mouse",
                     "action": "Sword Swing",

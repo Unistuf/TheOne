@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    float speedX, speedY;
     public Animator animator;
+    public PlayerControls controls;
 
     Vector2 movement;
 
@@ -19,16 +19,12 @@ public class PlayerController : MonoBehaviour
         // grabs rigidbody component on player
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Movement
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        // rb.velocity = new Vector2(speedX, speedY);
-
         // Animation
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
@@ -37,12 +33,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
     }
 
-    // Called upon overlapping colliders
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnMove(InputValue value)
     {
-        
+        movement = value.Get<Vector2>();
+        rb.velocity = movement * moveSpeed;
     }
 }

@@ -319,10 +319,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1024897203}
   - component: {fileID: 1024897202}
+  - component: {fileID: 1024897201}
   - component: {fileID: 1024897204}
   - component: {fileID: 1024897205}
-  - component: {fileID: 1024897201}
   - component: {fileID: 1024897200}
+  - component: {fileID: 1024897206}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -553,6 +554,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1024897206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024897199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c14f8f38a123d4a91f75337110aa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 0.5
+  isAttacking: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

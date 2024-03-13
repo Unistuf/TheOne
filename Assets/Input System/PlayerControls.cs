@@ -40,7 +40,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Sword Swing"",
                     ""type"": ""Value"",
                     ""id"": ""b0aca02b-b7dc-44b1-a277-08039a9c57d2"",
-                    ""expectedControlType"": ""Pose"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -192,9 +192,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""7f670e5e-948e-4a92-b918-295ddb2e4356"",
                     ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;Keyboard&Mouse"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Sword Swing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
         // grabs rigidbody component on player
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        
     }
 
     // Update is called once per frame
@@ -29,11 +28,6 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-    }
-
-    void FixedUpdate()
-    {
-
     }
 
     public void OnMove(InputValue value)

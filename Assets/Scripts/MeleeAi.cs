@@ -21,13 +21,12 @@ public class MeleeAi : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+            if (Vector3.Distance(transform.position, player.transform.position) < attackRange - 0.1f)
             {
                 DoAttack();
             }
             else
             {
-                Debug.Log("A");
                 float movementStep = movementSpeed / 100;
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementStep);
             }
@@ -37,6 +36,7 @@ public class MeleeAi : MonoBehaviour
     void DoAttack()
     {
         //Attack code goes in here
+        Debug.Log("MeleeAttack");
     }
 
     void DoDamage(float damage)

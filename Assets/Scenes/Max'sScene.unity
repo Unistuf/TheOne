@@ -578,7 +578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1354501711
 Transform:
   m_ObjectHideFlags: 0
@@ -657,6 +657,62 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1966362147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966362149}
+  - component: {fileID: 1966362148}
+  m_Layer: 0
+  m_Name: DungeonGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1966362148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966362147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198484774c458774b99c4281594d2124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugGenerate: 0
+  DebugPrintLayout: 0
+  gridLength: 7
+  gridWidth: 5
+  roomChance: 47
+  dungeonTiles:
+  - prefab: {fileID: 3368380355666082110, guid: d030a715301e67c41804038b5f46cc07, type: 3}
+  - prefab: {fileID: 4335635105961648804, guid: a5007d9093c17d34483065c5bd329cc5, type: 3}
+  - prefab: {fileID: 7081129553533356100, guid: f5cb92b20261c9845989ecc3048bf7ae, type: 3}
+  dungeonRoomExitPrefab: {fileID: 2934118971165011469, guid: 744a985786e38f6438cb381e9fa1e567, type: 3}
+  dungeonRoomEntryPrefab: {fileID: 5847814849128149931, guid: e59945b8f78cece4ba2ac5da47c90a2e, type: 3}
+  spawnedTiles: []
+--- !u!4 &1966362149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966362147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2063433987
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2063433988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,3 +819,4 @@ SceneRoots:
   - {fileID: 96843852}
   - {fileID: 1354501711}
   - {fileID: 2063433990}
+  - {fileID: 1966362149}

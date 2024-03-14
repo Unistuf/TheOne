@@ -567,7 +567,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 0.5
-  isAttacking: 0
+  insideZone: 0
+  zoneWidth: 0.3
+  zoneHeight: 0.8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

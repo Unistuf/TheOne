@@ -17,6 +17,7 @@ public class DungeonManager : MonoBehaviour
     [Header("Settings")]
     public int gridLength;
     public int gridWidth;
+    public Minimap minimap;
 
     [Range(0,100)]
     public int roomChance;
@@ -29,31 +30,37 @@ public class DungeonManager : MonoBehaviour
     [Header("Runtime")]
     public int[,] dungeonLayout;
     public List<GameObject> spawnedTiles;
+    private GameObject temp;
 
     void Update()
     {
-        if (DebugGenerate){DebugGenerate = false; GenerateDungeon();}
+        if (DebugGenerate){DebugGenerate = false; GenerateDungeon();} //Start the dungeon gen chain
 
-        if (DebugPrintLayout){DebugPrintLayout = false; PrintLayout();}
+        if (DebugPrintLayout){DebugPrintLayout = false; PrintLayout();} //Print the layout to the debug console
     }
 
 
     public void GenerateDungeon()
     {
-        int midpoint = Mathf.FloorToInt(gridWidth / 2);
+        int midpoint = Mathf.FloorToInt(gridWidth / 2); //get the center point of the room
 
         ClearDungeon();
         GenerateDungeonLayout(midpoint);
         GenerateDungeonObjects();
+        minimap.UpdateMap(dungeonLayout, gridLength, gridWidth);
     }
 
-    void ClearDungeon()
+    void ClearDungeon()//Delete All previously placed tiles and data if they exist
     {
+        for (int i = 0; i < spawnedTiles.Count; i++) 
+        {
+            Destroy(spawnedTiles[i]);
+        }
         dungeonLayout = new int[gridWidth, gridLength];
         spawnedTiles = new List<GameObject>();
     }
 
-    void GenerateDungeonLayout(int midpoint)
+    void GenerateDungeonLayout(int midpoint) //Generates the layout branching from the middle
     {
         MakeDefinatePath(midpoint);    
 
@@ -82,7 +89,7 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    void MakeDefinatePath(int midpoint)
+    void MakeDefinatePath(int midpoint) //Makes the middle path
     {
         dungeonLayout[midpoint, gridLength - 1] = -2; //Set to -2 which refers to exit tile
         dungeonLayout[midpoint, 0] = -1; //Set to -1 which refers to entry tile
@@ -95,18 +102,23 @@ public class DungeonManager : MonoBehaviour
 
     void GenerateDungeonObjects()
     {
-        GameObject temp = new GameObject();
-
         for (int x = 0; x < gridWidth; x++)
         {
             for (int y = 0; y < gridLength; y++)
             {
-                switch(dungeonLayout[x,y])
+                switch(dungeonLayout[x,y]) //gets the value of the tile at x/y
                 {
-                    default: temp = Instantiate(dungeonTiles[Random.Range(0, dungeonTiles.Length)].prefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break;
-                    case 0: break;
-                    case -1: temp = Instantiate(dungeonRoomEntryPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break;
-                    case -2: temp = Instantiate(dungeonRoomExitPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break;
+                    default: //Default if its not an Empty or Start or End tile
+                        temp = Instantiate(dungeonTiles[Random.Range(0, dungeonTiles.Length)].prefab, new Vector3(x * 10, y * 10, 0), transform.rotation); 
+                        temp.transform.parent = this.gameObject.transform;
+                        
+                        DungeonTileScript tempTileScript = temp.GetComponent<DungeonTileScript>();
+                        CheckForTiles(x, y, tempTileScript); //Start the tile check on each side
+                    break;
+
+                    case 0: break; //Empty tile
+                    case -1: temp = Instantiate(dungeonRoomEntryPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break; //Start Tile
+                    case -2: temp = Instantiate(dungeonRoomExitPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break; //End Tile
                 }
 
                 spawnedTiles.Add(temp);
@@ -115,7 +127,43 @@ public class DungeonManager : MonoBehaviour
 
     }
 
-    void PrintLayout()
+    void CheckForTiles(int x, int y, DungeonTileScript tempTileScript) //Checks if theres a tile on a respective side then enables the door if needed
+    {
+        if (y > 0) //Check if tile is below
+        {
+            if (dungeonLayout[x, y - 1] != 0)
+            {
+                tempTileScript.isTileBelow = true;
+            }
+        }
+
+        if (x > 0) //Check if tile is to the left
+        {
+            if (dungeonLayout[x - 1, y] != 0)
+            {
+                tempTileScript.isTileLeft = true;
+            }
+        }
+        if (x < gridWidth - 1) //Check if tile is to the right
+        {
+            if (dungeonLayout[x + 1, y] != 0)
+            {
+                tempTileScript.isTileRight = true;
+            }
+        }
+
+        if (y < gridLength) //Check if tile is to the above
+        {
+            if (dungeonLayout[x, y + 1] != 0)
+            {
+                tempTileScript.isTileAbove = true;
+            }
+        }
+
+        tempTileScript.UpdateDoors();
+    }
+
+    void PrintLayout() //Debug command that outputs the layout to the console
     {
         string debugOutput = "";
 

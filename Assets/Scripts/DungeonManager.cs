@@ -21,16 +21,21 @@ public class DungeonManager : MonoBehaviour
 
     [Range(0,100)]
     public int roomChance;
+
+    [Header("SafeZones")]
+    public Vector2 safeZoneMinMax;
     
     [Header("Rooms")]
-    public dungeonTile[] dungeonTiles;
-    public GameObject dungeonRoomExitPrefab;
-    public GameObject dungeonRoomEntryPrefab;
+    public dungeonTile[] dungeonTiles;        // 1+
+    public dungeonTile[] safeZoneTiles;       // -3
+    public GameObject dungeonRoomExitPrefab;  // -2
+    public GameObject dungeonRoomEntryPrefab; // -1 
 
     [Header("Runtime")]
     public int[,] dungeonLayout;
     public List<GameObject> spawnedTiles;
     private GameObject temp;
+    private DungeonTileScript tempTileScript;
 
     void Update()
     {
@@ -63,13 +68,14 @@ public class DungeonManager : MonoBehaviour
     void GenerateDungeonLayout(int midpoint) //Generates the layout branching from the middle
     {
         MakeDefinatePath(midpoint);    
+        MakeSafeZone();
 
         //Left side code
         for (int i = midpoint - 1; i > 0; i--)
         {
             for (int y = 1; y < gridLength - 1; y++)
             {
-                if (dungeonLayout[i + 1, y] != 0 && Random.Range(0,100) <= roomChance)
+                if (dungeonLayout[i + 1, y] != 0 && Random.Range(0,100) <= roomChance && dungeonLayout[i + 1, y] != -3) //Only continue if the tile is filled (no safezones) and if the chance is met
                 {
                     dungeonLayout[i, y] = Random.Range(1, dungeonTiles.Length); //Pick from tiles
                 }
@@ -81,11 +87,72 @@ public class DungeonManager : MonoBehaviour
         {
             for (int y = 1; y < gridLength - 1; y++)
             {
-                if (dungeonLayout[i - 1, y] != 0 && Random.Range(0,100) <= roomChance)
+                if (dungeonLayout[i - 1, y] != 0 && Random.Range(0,100) <= roomChance && dungeonLayout[i - 1, y] != -3) //Only continue if the tile is filled (no safezones) and if the chance is met
                 {
                     dungeonLayout[i, y] = Random.Range(1, dungeonTiles.Length); //Pick from tiles
                 }
             }           
+        }
+
+        CheckIfSafeZonesConnected();
+    }
+
+    void CheckIfSafeZonesConnected() //Check if the tile is a safezone and delete it if its not attached to a room (safe rooms do not count as a connection)
+    {
+        bool isTileConnected = false;
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridLength; y++)
+            {
+                if (dungeonLayout[x, y] == -3) 
+                {
+                    if (y < gridLength) //Check if tile is below
+                    {
+                        if (dungeonLayout[x, y + 1] != 0 && dungeonLayout[x, y + 1] != -3)
+                        {
+                            isTileConnected = true;
+                        }
+                        else if (x == gridWidth / 2)
+                        {
+                            isTileConnected = true;
+                        }
+                    }
+
+                    if (y > 0) //Check if tile is above
+                    {
+                        if (dungeonLayout[x, y - 1] != 0 && dungeonLayout[x, y - 1] != -3)
+                        {
+                            isTileConnected = true;
+                        }
+                        else if (x == gridWidth / 2)
+                        {
+                            isTileConnected = true;
+                        }
+                    }
+
+                    if (!isTileConnected)
+                    {
+                        dungeonLayout[x, y] = 0;
+                    }                    
+                }
+            }
+        }
+    }
+
+    void MakeSafeZone()
+    {
+        for (int i = 0; i < Random.Range(safeZoneMinMax.x, safeZoneMinMax.y); i++)
+        {
+            int rngX = Random.Range(1, gridWidth - 1); //Random X pos
+            int rngY = Random.Range(1, gridLength - 1); //Random Y pos
+
+            if (i < safeZoneMinMax.x) //Ensure a minimum amount of Safe Zones are placed in the center 
+            {
+                rngX = gridWidth / 2;
+            }
+      
+            dungeonLayout[rngX, rngY] = -3; //Make tile a safezone
         }
     }
 
@@ -96,7 +163,10 @@ public class DungeonManager : MonoBehaviour
 
         for (int i = 1; i < gridLength - 1; i++)
         {
-            dungeonLayout[midpoint, i] = Random.Range(1, dungeonTiles.Length); //Pick from tiles
+            if (dungeonLayout[midpoint, i] == 0)
+            {
+                dungeonLayout[midpoint, i] = Random.Range(1, dungeonTiles.Length); //Pick from tiles
+            }
         }
     }
 
@@ -112,13 +182,29 @@ public class DungeonManager : MonoBehaviour
                         temp = Instantiate(dungeonTiles[Random.Range(0, dungeonTiles.Length)].prefab, new Vector3(x * 10, y * 10, 0), transform.rotation); 
                         temp.transform.parent = this.gameObject.transform;
                         
-                        DungeonTileScript tempTileScript = temp.GetComponent<DungeonTileScript>();
+                        tempTileScript = temp.GetComponent<DungeonTileScript>();
                         CheckForTiles(x, y, tempTileScript); //Start the tile check on each side
                     break;
 
                     case 0: break; //Empty tile
-                    case -1: temp = Instantiate(dungeonRoomEntryPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break; //Start Tile
-                    case -2: temp = Instantiate(dungeonRoomExitPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); break; //End Tile
+
+                    case -1: //Start Tile
+                        temp = Instantiate(dungeonRoomEntryPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); 
+                        temp.transform.parent = this.gameObject.transform;
+                    break; 
+
+                    case -2: //End Tile
+                        temp = Instantiate(dungeonRoomExitPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); 
+                        temp.transform.parent = this.gameObject.transform;
+                    break; 
+
+                    case -3: //Safe zone tile
+                        temp = Instantiate(safeZoneTiles[Random.Range(0, safeZoneTiles.Length)].prefab, new Vector3(x * 10, y * 10, 0), transform.rotation); 
+                        temp.transform.parent = this.gameObject.transform;
+
+                        tempTileScript = temp.GetComponent<DungeonTileScript>();
+                        CheckForTiles(x, y, tempTileScript); //Start the tile check on each side
+                    break; 
                 }
 
                 spawnedTiles.Add(temp);

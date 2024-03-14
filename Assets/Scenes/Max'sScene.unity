@@ -770,6 +770,7 @@ MonoBehaviour:
   entryIcon: {fileID: 5236374854919390398, guid: 1e84caf2c4914df49b73ecf214673a8c, type: 3}
   exitIcon: {fileID: 8913316000127982333, guid: 4077e206aa0f8fd42874b39616538837, type: 3}
   regularIcon: {fileID: 2255599031449178620, guid: 68e8005199b453144a463768f57ee8e6, type: 3}
+  safeZoneIcon: {fileID: 5236374854919390398, guid: 6ba7b772f3a686047b638ec5420df8e0, type: 3}
   spawnedIcons: []
 --- !u!4 &883333194
 Transform:
@@ -1136,12 +1137,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugGenerate: 0
   DebugPrintLayout: 0
-  gridLength: 7
+  gridLength: 10
   gridWidth: 7
   minimap: {fileID: 883333193}
   roomChance: 47
+  safeZoneMinMax: {x: 1, y: 3}
   dungeonTiles:
   - prefab: {fileID: 3368380355666082110, guid: b111ca8cf2179134b8c81fec20cad8a2, type: 3}
+  safeZoneTiles:
+  - prefab: {fileID: 3368380355666082110, guid: 25f6ef1492395e942b11872a222906b1, type: 3}
   dungeonRoomExitPrefab: {fileID: 2934118971165011469, guid: 744a985786e38f6438cb381e9fa1e567, type: 3}
   dungeonRoomEntryPrefab: {fileID: 5847814849128149931, guid: e59945b8f78cece4ba2ac5da47c90a2e, type: 3}
   spawnedTiles: []

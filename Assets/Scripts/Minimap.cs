@@ -14,6 +14,7 @@ public class Minimap : MonoBehaviour
     public GameObject entryIcon;
     public GameObject exitIcon;
     public GameObject regularIcon;
+    public GameObject safeZoneIcon;
 
     [Header("Runtime")]
     public List<GameObject> spawnedIcons;
@@ -49,6 +50,12 @@ public class Minimap : MonoBehaviour
 
                     case -2: 
                         temp = Instantiate(exitIcon, new Vector3(transform.position.x + x * iconDistance, transform.position.y + y * iconDistance, 0), transform.rotation);
+                        spawnedIcons.Add(temp);
+                        temp.transform.SetParent(transform);               
+                    break;
+
+                    case -3: 
+                        temp = Instantiate(safeZoneIcon, new Vector3(transform.position.x + x * iconDistance, transform.position.y + y * iconDistance, 0), transform.rotation);
                         spawnedIcons.Add(temp);
                         temp.transform.SetParent(transform);               
                     break;

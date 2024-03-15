@@ -30,8 +30,10 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
+    // Use our Move action from the new input system to get our input
     public void OnMove(InputValue value)
     {
+        // Grab the value of the left stick, and apply it as velocity to our RB
         movement = value.Get<Vector2>();
         rb.velocity = movement * moveSpeed;
     }

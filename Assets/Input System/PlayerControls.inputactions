@@ -18,7 +18,7 @@
                     "name": "Sword Swing",
                     "type": "Value",
                     "id": "b0aca02b-b7dc-44b1-a277-08039a9c57d2",
-                    "expectedControlType": "Pose",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,6 +27,42 @@
                     "name": "Roll",
                     "type": "Button",
                     "id": "fc6b8dc7-a226-40ee-a271-eb64ed5431ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "cb4e6abb-b763-40b0-b2e1-b45b46956bc7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "d3ab890e-9529-42a4-be97-ad24c5247236",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use Item/Potion",
+                    "type": "Button",
+                    "id": "05889497-744d-4bad-9ebd-3dbc4b93e1f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause/Menu",
+                    "type": "Button",
+                    "id": "adc44291-572d-41a4-9ff7-79f230b6b025",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -170,9 +206,9 @@
                     "name": "",
                     "id": "7f670e5e-948e-4a92-b918-295ddb2e4356",
                     "path": "<Gamepad>/rightStick",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;Keyboard&Mouse",
+                    "groups": "Gamepad",
                     "action": "Sword Swing",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -185,6 +221,50 @@
                     "processors": "",
                     "groups": "Gamepad;Keyboard&Mouse",
                     "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "001265e5-d574-41b3-abff-a6ead2b2936f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43d8d5a1-8411-4e30-93e9-5d6589346c82",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0019135c-d219-4ac7-9d0c-4b012ea05c8b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Item/Potion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab637710-81c7-4ce3-a655-47ea8bd7a032",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause/Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -553,7 +633,7 @@
                 {
                     "name": "",
                     "id": "9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc",
-                    "path": "*/{Submit}",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
@@ -564,7 +644,7 @@
                 {
                     "name": "",
                     "id": "82627dcc-3b13-4ba9-841d-e4b746d6553e",
-                    "path": "*/{Cancel}",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",

@@ -2061,6 +2061,7 @@ MonoBehaviour:
   safeZoneMinMax: {x: 1, y: 3}
   dungeonTiles:
   - prefab: {fileID: 3368380355666082110, guid: b111ca8cf2179134b8c81fec20cad8a2, type: 3}
+  - prefab: {fileID: 560423846818668275, guid: 3ab9e30be8c9444419b358e1b9fb2676, type: 3}
   safeZoneTiles:
   - prefab: {fileID: 3368380355666082110, guid: 25f6ef1492395e942b11872a222906b1, type: 3}
   dungeonRoomExitPrefab: {fileID: 2934118971165011469, guid: 744a985786e38f6438cb381e9fa1e567, type: 3}

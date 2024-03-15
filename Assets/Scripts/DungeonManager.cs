@@ -37,6 +37,11 @@ public class DungeonManager : MonoBehaviour
     private GameObject temp;
     private DungeonTileScript tempTileScript;
 
+    void Start()
+    {
+        GenerateDungeon();
+    }
+
     void Update()
     {
         if (DebugGenerate){DebugGenerate = false; GenerateDungeon();} //Start the dungeon gen chain
@@ -191,6 +196,7 @@ public class DungeonManager : MonoBehaviour
                     case -1: //Start Tile
                         temp = Instantiate(dungeonRoomEntryPrefab, new Vector3(x * 10, y * 10, 0), transform.rotation); 
                         temp.transform.parent = this.gameObject.transform;
+                        GameObject.Find("Player").transform.position = new Vector3(x * 10, y * 10, 0);
                     break; 
 
                     case -2: //End Tile

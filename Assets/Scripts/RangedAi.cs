@@ -36,7 +36,7 @@ public class RangedAi : MonoBehaviour
 
                 else if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMin)
                 {
-                    float movementStep = movementSpeed / 80;
+                    float movementStep = movementSpeed / 135;
                     transform.position = Vector3.MoveTowards(transform.position, player.transform.position, -movementStep);                    
                 }
 

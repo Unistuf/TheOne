@@ -32,6 +32,10 @@ public class SwordController : MonoBehaviour
 };
     [SerializeField] string comboString = string.Empty;
 
+    public GameObject ThrustHitbox;
+    public GameObject SwingHitbox;
+    public GameObject ParryHitbox;
+
     public void OnSwordSwing(InputValue value)
     {
         // Collect the input value of our right stick
@@ -64,7 +68,6 @@ public class SwordController : MonoBehaviour
 
     public IEnumerator SwordAttacks(string inZone)
     {
-        
         if (insideZone == false)
         {
             // If our stick has entered a new zone, lock this function until we leave it
@@ -85,6 +88,7 @@ public class SwordController : MonoBehaviour
                     {
                         foundOnFirstCheck = true;
                         Debug.Log(comboList[i, 0]);
+                        StartCoroutine(AttackWithSword(i));
                     }
                 }
 
@@ -115,6 +119,19 @@ public class SwordController : MonoBehaviour
         {
             insideZone = false;
         }
+
+        yield return null;
+    }
+
+    public IEnumerator AttackWithSword(int attackID)
+    {
+        if (attackID == 0)
+        {
+            GameObject currentThrust = Instantiate(ThrustHitbox, transform, false);
+            currentThrust.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+        }
+
+
 
         yield return null;
     }

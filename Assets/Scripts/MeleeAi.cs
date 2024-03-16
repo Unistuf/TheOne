@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeAi : MonoBehaviour
 {
     public GameObject player;
+    public Transform target;
 
     [Header("Enemy Config")]
     public float aggroRange;
@@ -30,6 +31,13 @@ public class MeleeAi : MonoBehaviour
                 float movementStep = movementSpeed / 100;
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementStep);
             }
+
+            // Needs Fixing because i cant figure out why it wont rotate on the fucking Z AXIS!!!!!!!!!
+
+            //if (target != null)
+            //{
+            //    // transform.forward(target);
+            //}
         }
     }
 

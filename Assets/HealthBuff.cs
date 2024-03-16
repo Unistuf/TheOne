@@ -13,6 +13,6 @@ public class HealthBuff : PowerUpEffect
        
         // Add Health Ref to player here
         //                       \/
-        // target.GetComponent<Health>()>health.value += amount;
+        // target.GetComponent<PlayerHealth>().health.value += amount;
     }
 }

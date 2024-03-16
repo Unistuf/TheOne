@@ -8,7 +8,6 @@ public class AIspawner : MonoBehaviour
     [SerializeField] bool canSpawn = false;
 
     [SerializeField] GameObject player;
-    [SerializeField] GameObject spawnLocation;
 
     [Header("HOSTILE PREFABS")]
     [SerializeField] GameObject[] enemyPrefabs;

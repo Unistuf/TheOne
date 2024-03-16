@@ -5,6 +5,9 @@ using UnityEngine;
 public class RangedAi : MonoBehaviour
 {
     public GameObject player;
+    public GameObject projectilePrefab;
+
+    bool isAttacking;
 
     [Header("Enemy Config")]
     public float aggroRange;
@@ -12,6 +15,7 @@ public class RangedAi : MonoBehaviour
     public float movementSpeed;
     public float attackRangeMin;
     public float attackRangeMax;
+    public float attackCooldown;
 
     void Start()
     {
@@ -22,9 +26,9 @@ public class RangedAi : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMax &&Vector3.Distance(transform.position, player.transform.position) > attackRangeMin)
+            if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMax && Vector3.Distance(transform.position, player.transform.position) > attackRangeMin)
             {
-                DoAttack();
+                StartCoroutine(DoAttack());
             }
             else
             {
@@ -37,17 +41,47 @@ public class RangedAi : MonoBehaviour
                 else if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMin)
                 {
                     float movementStep = movementSpeed / 135;
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, -movementStep);                    
+                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, -movementStep);
                 }
 
             }
         }
     }
 
-    void DoAttack()
+    IEnumerator DoAttack()
     {
-        //Attack code goes in here
-        Debug.Log("SHOOT");
+        if (!isAttacking)
+        {
+            // Lock coroutine until it finishes
+            isAttacking = true;
+
+            // Create a projectile and set its target to the player
+            GameObject currentProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, this.transform);
+            currentProjectile.GetComponent<EnemyProjectileLogic>().target = player;
+
+            // Then wait for the attack cooldown, then unlock the coroutine
+            yield return new WaitForSeconds(attackCooldown);
+            isAttacking = false;
+        }
+    }
+
+    IEnumerator DoHomingAttack()
+    {
+        if (!isAttacking)
+        {
+            // Lock coroutine until it finishes
+            isAttacking = true;
+
+            // Create a projectile and set its target to the player
+            GameObject currentProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, this.transform);
+            currentProjectile.GetComponent<EnemyProjectileLogic>().target = player;
+            currentProjectile.GetComponent<EnemyProjectileLogic>().isHoming = true;
+            currentProjectile.GetComponent<EnemyProjectileLogic>().projectileSpeed = 3f;
+
+            // Then wait for the attack cooldown, then unlock the coroutine
+            yield return new WaitForSeconds(attackCooldown);
+            isAttacking = false;
+        }
     }
 
     void DoDamage(float damage)

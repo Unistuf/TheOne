@@ -11,9 +11,9 @@ public class SwordController : MonoBehaviour
 
     [SerializeField] float attackCooldown = 0.5f;
     public bool insideZone;
+    public string currentZone;
 
     string comboString;
-    bool extendingString;
 
     Vector2 rStickPos;
     [SerializeField] float zoneWidth = 0.3f;
@@ -38,35 +38,26 @@ public class SwordController : MonoBehaviour
         Debug.Log("Input called");
 
 
-        if (insideZone == false)
-        {
-            if (rStickPos.y >= zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth && insideZone == false)
-            {
-                Debug.Log("A");
-                insideZone = true;
 
-                StartCoroutine(SwordAttacks("A"));
-            }
-            else if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x >= zoneHeight && insideZone == false)
-            {
-                Debug.Log("B");
-                insideZone = true;
-            }
-            else if (rStickPos.y <= -zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth && insideZone == false)
-            {
-                Debug.Log("C");
-                insideZone = true;
-            }
-            else if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x <= -zoneHeight && insideZone == false)
-            {
-                Debug.Log("D");
-                insideZone = true;
-            }
-            else
-            {
-                insideZone = false;
-                Debug.Log("false");
-            }
+        if (rStickPos.y >= zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth)
+        {
+            StartCoroutine(SwordAttacks("A"));
+        }
+        if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x >= zoneHeight)
+        {
+            StartCoroutine(SwordAttacks("B"));
+        }
+        if (rStickPos.y <= -zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth)
+        {
+            StartCoroutine(SwordAttacks("C"));
+        }
+        if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x <= -zoneHeight)
+        {
+            StartCoroutine(SwordAttacks("D"));
+        }
+        if (rStickPos.y <= zoneHeight && rStickPos.y >= -zoneHeight && rStickPos.x <= zoneHeight && rStickPos.x >= -zoneHeight)
+        {
+            StartCoroutine(SwordAttacks("N"));
         }
     }
 
@@ -74,11 +65,18 @@ public class SwordController : MonoBehaviour
     {
         if (insideZone == false)
         {
-            extendingString = true;
+            insideZone = true;
+            currentZone = inZone;
 
-            comboString += inZone;
+            if (inZone != "N")
+            {
+                comboString += inZone;
+            }
+        }
 
-            extendingString = false;
+        if (inZone != currentZone)
+        {
+            insideZone = false;
         }
 
         Debug.Log(comboString);

@@ -573,6 +573,13 @@ MonoBehaviour:
   currentZone: 
   zoneWidth: 0.3
   zoneHeight: 0.8
+  basicThrust: A
+  basicRightSwing: B
+  basicLeftSwing: D
+  basicParry: C
+  DoubleThrust: AA
+  AB: AB
+  AAA: AAA
 --- !u!114 &1024897207
 MonoBehaviour:
   m_ObjectHideFlags: 0

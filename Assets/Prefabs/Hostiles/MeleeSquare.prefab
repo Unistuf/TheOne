@@ -103,7 +103,7 @@ MonoBehaviour:
   aggroRange: 5
   healthPoints: 5
   movementSpeed: 5
-  attackRange: 2
+  attackRange: 1
 --- !u!61 &-1439125470918512453
 BoxCollider2D:
   m_ObjectHideFlags: 0

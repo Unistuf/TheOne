@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2996442780055556778}
   - component: {fileID: 7727808058644391787}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: RangedTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

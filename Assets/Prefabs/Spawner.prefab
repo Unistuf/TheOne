@@ -46,4 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRate: 5
   canSpawn: 1
-  enemyPrefabs: []
+  player: {fileID: 0}
+  spawnLocation: {fileID: 0}
+  enemyPrefabs:
+  - {fileID: 4885495403049249818, guid: 18cfdd964e8777740892ec1fc5979ebe, type: 3}
+  - {fileID: 1074799338644297899, guid: f89a9793e1e3f6541a417fc75e2c136f, type: 3}
+  inRange: 5

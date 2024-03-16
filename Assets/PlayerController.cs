@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Animation
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        //animator.SetFloat("Horizontal", movement.x);
+        //animator.SetFloat("Vertical", movement.y);
+        //animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     // Use our Move action from the new input system to get our input

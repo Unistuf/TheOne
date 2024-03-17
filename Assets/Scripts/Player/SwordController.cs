@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -103,6 +104,7 @@ public class SwordController : MonoBehaviour
                         if (lastAttack == comboList[i, 1])
                         {
                             Debug.Log(comboList[i, 0]);
+                            StartCoroutine(AttackWithSword(i));
                         }
                     }
                 }
@@ -126,19 +128,63 @@ public class SwordController : MonoBehaviour
 
     public IEnumerator AttackWithSword(int attackID)
     {
-        if (!playerHealth.isImmortal) //Player cannot attack while immortal
+        if (!playerHealth.isImmortal) // Player cannot attack while immortal
         {
             if (attackID == 0)
             {
-                GameObject currentThrust = Instantiate(ThrustHitbox, transform, false);
-                currentThrust.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+                StartCoroutine(ThrustAttack());
+            }
+            if (attackID == 1)
+            {
+                StartCoroutine(SwingAttack(true));
+            }
+            if (attackID == 3)
+            {
+                StartCoroutine(SwingAttack(false));
+            }
+            if (attackID == 4)
+            {
+                StartCoroutine(ThrustAttack());
+                yield return new WaitForSeconds(0.1f);
+                StartCoroutine(ThrustAttack());
             }
         }
-
-
 
         yield return null;
     }
 
+    public IEnumerator ThrustAttack()
+    {
+        GameObject currentAttack = Instantiate(ThrustHitbox, transform);
+
+        for (int i = 0; i < 100; i++)
+        {
+            currentAttack.transform.localPosition = new Vector3(0, i * 0.025f, 0);
+            yield return new WaitForSeconds(0.00005f);
+        }
+
+        Destroy(currentAttack);
+        yield return null;
+    }
+
+    public IEnumerator SwingAttack(bool isRight)
+    {
+        GameObject currentAttack = Instantiate(SwingHitbox, transform);
+        float multiplier = 2f;
+
+        if (isRight)
+        {
+            multiplier = -2f;
+        }
+
+        for (int i = 0; i <= 45; i++)
+        {
+            currentAttack.transform.rotation = Quaternion.Euler(0, 0, i * multiplier) * transform.parent.transform.rotation;
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        Destroy(currentAttack);
+        yield return null;
+    }
 
 }

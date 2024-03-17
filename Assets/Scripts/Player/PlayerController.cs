@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Quaternion playerAim = Quaternion.LookRotation(Vector3.forward, movement);
+        
+        transform.rotation = playerAim;
+
         // Animation
         //animator.SetFloat("Horizontal", movement.x);
         //animator.SetFloat("Vertical", movement.y);

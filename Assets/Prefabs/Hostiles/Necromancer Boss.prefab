@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 4566683080795280565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.19, y: 4.91, z: 0}
+  m_LocalPosition: {x: -14.26, y: 4.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -286,8 +286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  fireRate: 1
-  aggroRange: 5
+  fireRate: 1.5
+  aggroRange: 30
+  projectileLife: 14
   summonCoolDown: 15
   spawnPositions:
   - {fileID: 8771816247104108693}
@@ -301,10 +302,10 @@ MonoBehaviour:
   - {fileID: 4586138713905484592}
   spawnMinMax: {x: 1, y: 4}
   spinAttackAfterRegularShots: 6
-  spinDuration: 4
-  shotsDuringSpin: 20
-  spinSpeed: 3
-  bullet: {fileID: 0}
+  spinDuration: 1
+  shotsDuringSpin: 8
+  spinSpeed: 0
+  bullet: {fileID: 623865145315103932, guid: a7af4a3913f82054fb405bf5921e3f25, type: 3}
   meleeAi: {fileID: 4885495403049249818, guid: 18cfdd964e8777740892ec1fc5979ebe, type: 3}
   rangedAi: {fileID: 1074799338644297899, guid: f89a9793e1e3f6541a417fc75e2c136f, type: 3}
   isAggro: 0

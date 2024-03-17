@@ -18,6 +18,9 @@ public class EnemyProjectileLogic : MonoBehaviour
     [Header("Whether the projectile is destroyed or not after hitting a collider")]
     public bool destroySelfOnHit;
 
+    [Header("Projectile Lifetime (0 = infinite)")]
+    public float lifeTime;
+
     public Rigidbody2D rb;
     public GameObject parentEnemy;
     public GameObject target;
@@ -51,6 +54,8 @@ public class EnemyProjectileLogic : MonoBehaviour
         {
             StartCoroutine(ProjectileHoming());
         }
+
+        StartCoroutine(DestroyOverTime());
     }
 
     IEnumerator ProjectileHoming()
@@ -88,8 +93,18 @@ public class EnemyProjectileLogic : MonoBehaviour
             target.GetComponent<PlayerHealth>().ApplyDamage(damage);
         }
         
-        // And destroy ourselves if we should upon touching any collider that isn't our parent enemy
-        if (otherCollider.gameObject != parentEnemy && destroySelfOnHit)
+        // And destroy ourselves if we should upon touching any collider that isn't our parent Enemy     //Do nothing if the collision is with another bullet
+        if (otherCollider.gameObject != parentEnemy && destroySelfOnHit && otherCollider.gameObject.tag != "bullet")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator DestroyOverTime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+
+        if (lifeTime > 0)
         {
             Destroy(gameObject);
         }

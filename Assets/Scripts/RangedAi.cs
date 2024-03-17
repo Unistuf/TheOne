@@ -73,10 +73,10 @@ public class RangedAi : MonoBehaviour
             isAttacking = true;
 
             // Create a projectile and set its target to the player
-            GameObject currentProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, this.transform);
-            currentProjectile.GetComponent<EnemyProjectileLogic>().target = player;
-            currentProjectile.GetComponent<EnemyProjectileLogic>().isHoming = true;
-            currentProjectile.GetComponent<EnemyProjectileLogic>().projectileSpeed = 3f;
+            EnemyProjectileLogic currentProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, this.transform).GetComponent<EnemyProjectileLogic>();
+            currentProjectile.target = player;
+            currentProjectile.isHoming = true;
+            currentProjectile.projectileSpeed = 3f;
 
             // Then wait for the attack cooldown, then unlock the coroutine
             yield return new WaitForSeconds(attackCooldown);

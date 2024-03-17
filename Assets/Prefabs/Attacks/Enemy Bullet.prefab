@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2372313810461755313}
   m_Layer: 0
   m_Name: Enemy Bullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   isHoming: 0
   homingStrength: 0.05
   destroySelfOnHit: 1
+  lifeTime: 0
   rb: {fileID: 0}
   parentEnemy: {fileID: 0}
   target: {fileID: 0}

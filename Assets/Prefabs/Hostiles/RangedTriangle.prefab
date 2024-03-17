@@ -100,11 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  aggroRange: 8
+  projectilePrefab: {fileID: 0}
+  aggroRange: 25
   healthPoints: 5
   movementSpeed: 5
   attackRangeMin: 3
   attackRangeMax: 5
+  attackCooldown: 0
 --- !u!60 &-2996442780055556778
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  aggroRange: 5
+  target: {fileID: 0}
+  aggroRange: 25
   healthPoints: 5
   movementSpeed: 5
   attackRange: 1

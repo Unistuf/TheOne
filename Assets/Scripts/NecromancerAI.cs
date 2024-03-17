@@ -8,6 +8,7 @@ public class NecromancerAI : MonoBehaviour
     public int health;
     public float fireRate;
     public float aggroRange;
+    public float projectileLife;
 
     [Header("Necro stats")]
     public float summonCoolDown;
@@ -32,7 +33,7 @@ public class NecromancerAI : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player"); //Get player ref
 
         StartCoroutine(RegularFireCD());
         StartCoroutine(SpinAttackCD());
@@ -41,7 +42,7 @@ public class NecromancerAI : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < aggroRange)
+        if (Vector3.Distance(player.transform.position, transform.position) < aggroRange) //Check for player in range
         {
             isAggro = true;
         }
@@ -52,36 +53,48 @@ public class NecromancerAI : MonoBehaviour
 
     IEnumerator RegularFireCD()
     {
-        if (isAggro)
+        if (isAggro)//If the player is in range fire a homing bullet
         {
-            //Shoot Bullet
-            Debug.Log("Shot");
+            EnemyProjectileLogic currentProjectile = Instantiate(bullet, transform.position, Quaternion.identity, this.transform).GetComponent<EnemyProjectileLogic>();
+            currentProjectile.target = player;
+            currentProjectile.isHoming = true;
+            currentProjectile.projectileSpeed = 3f;
+            currentProjectile.projectileLifespan = projectileLife;
+
+            shotsFired += 1; //Increase shots fired for the spin attack to trigger
         }
 
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate); //Wait for the firerate
         StartCoroutine(RegularFireCD());
     }
 
-    IEnumerator SpinAttackCD()
+    IEnumerator SpinAttackCD() //Aoe Attack
     {
-        if (isAggro && shotsFired >= spinAttackAfterRegularShots)
+        if (isAggro && shotsFired >= spinAttackAfterRegularShots) //If player is in range and enough regular shots have been fired to trigger the spin attack
         {
-            for (int i = 0; i < shotsDuringSpin; i++)
+            for (int i = 0; i < shotsDuringSpin; i++) //Cycle through the amount of shots during spin
             {
-                yield return new WaitForSeconds(spinDuration / shotsDuringSpin);
+                for (int u = 0; u < spawnPositions.Length; u++) //Cycle through the spawn positions
+                {
+                    //Spawn homing bullets
+                    EnemyProjectileLogic currentProjectile = Instantiate(bullet, spawnPositions[u].position, Quaternion.identity, this.transform).GetComponent<EnemyProjectileLogic>();
+                    currentProjectile.target = player;
+                    currentProjectile.isHoming = true;
+                    currentProjectile.projectileSpeed = 3f;
+                    currentProjectile.projectileLifespan = projectileLife;
+                }
 
-                //Shoot Bullet
-                Debug.Log("SpinAttackShot");
+                yield return new WaitForSeconds(spinDuration / shotsDuringSpin); //Fire another shot after the spin duration (split amongst each spin attack)
             }
 
-            shotsFired = 0;
+            shotsFired = 0; //Reset the amount of shots to trigger this move again
         }
 
         yield return new WaitForSeconds(0.25f);
         StartCoroutine(SpinAttackCD());
     }
 
-    IEnumerator DeadSummonCD()
+    IEnumerator DeadSummonCD() //Summon a random amount of random Ai after a set amount of time 
     {
         if (isAggro)
         {

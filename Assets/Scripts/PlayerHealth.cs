@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health is changed during runtime, only modify maxHealth in editor")]
-    [SerializeField] float health;
+    public float health;
     [SerializeField] float maxHealth = 100f;
 
     [Header("Set to false if the player should not be deactivated on death")]

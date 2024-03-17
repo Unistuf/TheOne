@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class SwordController : MonoBehaviour
 {
     public PlayerControls controls;
+    public PlayerHealth playerHealth;
 
     [SerializeField] float attackCooldown = 0.5f;
 
@@ -125,10 +126,13 @@ public class SwordController : MonoBehaviour
 
     public IEnumerator AttackWithSword(int attackID)
     {
-        if (attackID == 0)
+        if (!playerHealth.isImmortal) //Player cannot attack while immortal
         {
-            GameObject currentThrust = Instantiate(ThrustHitbox, transform, false);
-            currentThrust.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+            if (attackID == 0)
+            {
+                GameObject currentThrust = Instantiate(ThrustHitbox, transform, false);
+                currentThrust.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+            }
         }
 
 

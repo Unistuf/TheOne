@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour
     [Header("Set to false if the player should not be deactivated on death")]
     [SerializeField] bool setInactiveOnDeath = true;
 
+    [Header("Safezone Immortal Flag")]
+    public bool isImmortal = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +24,22 @@ public class PlayerHealth : MonoBehaviour
     // Apply damage to the player with this function
     public void ApplyDamage(float damage)
     {
-        // Take the damage
-        health -= damage;
-
-        // Then check if we are dead
-        if (health <= 0)
+        if (!isImmortal) //check if the player isnt immortal
         {
-            // Cap our health at 0
-            health = 0;
+            // Take the damage
+            health -= damage;
 
-            // Then set ourselves to inactive if we should
-            if (setInactiveOnDeath)
+            // Then check if we are dead
+            if (health <= 0)
             {
-                gameObject.SetActive(false);
+                // Cap our health at 0
+                health = 0;
+
+                // Then set ourselves to inactive if we should
+                if (setInactiveOnDeath)
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -48,6 +54,34 @@ public class PlayerHealth : MonoBehaviour
         if (health > maxHealth)
         {
             health = maxHealth;
+        }
+    }
+
+    IEnumerator SafeZoneHealing()
+    {
+        if (isImmortal)
+        {
+            ApplyHealing(maxHealth / 10); //Heal for 10% of the players hp
+        }
+
+        yield return new WaitForSeconds(0.2f); //Time between heals
+        StartCoroutine(SafeZoneHealing());
+    }
+
+
+    public void OnTriggerEnter2D(Collider2D col) 
+    {
+        if (col.gameObject.tag == "safeZone")
+        {
+            isImmortal = true;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "safeZone")
+        {
+            isImmortal = false;
         }
     }
 }

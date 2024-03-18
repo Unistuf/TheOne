@@ -160,6 +160,7 @@ public class SwordController : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             currentAttack.transform.localPosition = new Vector3(0, i * 0.025f, 0);
+            currentAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
             yield return new WaitForSeconds(0.00005f);
         }
 
@@ -170,6 +171,7 @@ public class SwordController : MonoBehaviour
     public IEnumerator SwingAttack(bool isRight)
     {
         GameObject currentAttack = Instantiate(SwingHitbox, transform);
+        currentAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
         float multiplier = 2f;
 
         if (isRight)

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8932806004948910007}
   - component: {fileID: 2558413117789861170}
   - component: {fileID: 5935138152150735690}
+  - component: {fileID: 3794944865092875513}
   m_Layer: 6
   m_Name: SwingSprite
   m_TagString: Untagged
@@ -132,7 +133,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -162,3 +163,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3794944865092875513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5405870892652986000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96260e1ba8214d843a97735151735558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1

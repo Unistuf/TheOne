@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3345171260718276104}
   m_Layer: 0
   m_Name: RangedAi
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   player: {fileID: 0}
   projectilePrefab: {fileID: 2038009405350806380, guid: 60dc7ffbb7cf6254fa1278cf141d38a3, type: 3}
   aggroRange: 10
-  healthPoints: 0
+  healthPoints: 5
   movementSpeed: 2
   attackRangeMin: 3
   attackRangeMax: 6
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.9082564, b: 0, a: 1}
   m_FlipX: 0

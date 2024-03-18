@@ -84,7 +84,7 @@ public class RangedAi : MonoBehaviour
         }
     }
 
-    void DoDamage(float damage)
+    public void DoDamage(float damage)
     {
         healthPoints -= damage;
 

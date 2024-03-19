@@ -126,10 +126,12 @@ public class SwordController : MonoBehaviour
         yield return null;
     }
 
+    // Initiate actual attacks
     public IEnumerator AttackWithSword(int attackID)
     {
         if (!playerHealth.isImmortal) // Player cannot attack while immortal
         {
+            // Attack IDs
             if (attackID == 0)
             {
                 StartCoroutine(ThrustAttack());
@@ -153,39 +155,45 @@ public class SwordController : MonoBehaviour
         yield return null;
     }
 
+    // Thrust attack logic
     public IEnumerator ThrustAttack()
     {
-        GameObject currentAttack = Instantiate(ThrustHitbox, transform);
+        GameObject currentThrustAttack = Instantiate(ThrustHitbox, transform);
+        currentThrustAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
 
+        // Move the hitbox forwards relative to the player
         for (int i = 0; i < 100; i++)
         {
-            currentAttack.transform.localPosition = new Vector3(0, i * 0.025f, 0);
-            currentAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
+            currentThrustAttack.transform.localPosition = new Vector3(0, i * 0.025f, 0);
+            currentThrustAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
             yield return new WaitForSeconds(0.00005f);
         }
 
-        Destroy(currentAttack);
+        // And destroy the game object after the attack is complete
+        Destroy(currentThrustAttack);
         yield return null;
     }
 
+    // Swing attack logic
     public IEnumerator SwingAttack(bool isRight)
     {
-        GameObject currentAttack = Instantiate(SwingHitbox, transform);
-        currentAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
+        GameObject currentSwingAttack = Instantiate(SwingHitbox, transform);
+        currentSwingAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
         float multiplier = 2f;
-
+        
+        // If we are swinging to the right, invert the rotation direction by making multiplier negative
         if (isRight)
         {
-            multiplier = -2f;
+            multiplier = -multiplier;
         }
-
+        //asdhahs
         for (int i = 0; i <= 45; i++)
         {
-            currentAttack.transform.rotation = Quaternion.Euler(0, 0, i * multiplier) * transform.parent.transform.rotation;
+            currentSwingAttack.transform.localRotation = Quaternion.Euler(0, 0, i * multiplier);
             yield return new WaitForSeconds(0.005f);
         }
 
-        Destroy(currentAttack, 3);
+        Destroy(currentSwingAttack.gameObject); // beeng
         yield return null;
     }
 

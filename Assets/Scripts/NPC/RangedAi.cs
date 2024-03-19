@@ -97,6 +97,7 @@ public class RangedAi : MonoBehaviour
     void DoDeath()
     {
         //Death code
+        player.GetComponent<XpLevelSystem>().AddPlayerXp(3);
         Destroy(this.gameObject);
     }
 }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AIspawner : MonoBehaviour
 {
-    [SerializeField] float spawnRate = 1f;
+    [SerializeField] float timeBetweenSpawns = 1f;
     [SerializeField] bool canSpawn = false;
-
+    [SerializeField] bool isSpawning = false;
+    
     [SerializeField] GameObject player;
 
     [Header("HOSTILE PREFABS")]
@@ -19,7 +20,7 @@ public class AIspawner : MonoBehaviour
     {
         player = GameObject.Find("Player");
 
-        StartCoroutine(Spawner());
+        
     }
 
     void Update()
@@ -27,6 +28,7 @@ public class AIspawner : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) < inRange)
         {
             canSpawn = true;
+            StartCoroutine(Spawner());
         }
         else
         {
@@ -36,15 +38,16 @@ public class AIspawner : MonoBehaviour
 
     private IEnumerator Spawner()
     {
-        WaitForSeconds wait = new WaitForSeconds(spawnRate);
-
-        while (canSpawn)
+        if (canSpawn && !isSpawning)
         {
-            yield return wait;
+            isSpawning = true;
 
             int rand = Random.Range(0, enemyPrefabs.Length);                                // Gets listed Prefabs of Hostiles
             GameObject enemyToSpawn = enemyPrefabs[rand];                                   // Picks randomly what AI to spawn (not random according to Mini max but mini max can stfu)
             Instantiate(enemyToSpawn, transform.position, Quaternion.Euler(0, 0, 0));       // Spawns Hostile within Scene
+
+            yield return new WaitForSeconds(timeBetweenSpawns);
+            isSpawning = false;
         }
     }
 }

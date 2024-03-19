@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269272685e23f3c4ab75d94951a13f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 5
+  timeBetweenSpawns: 3
   canSpawn: 1
-  player: {fileID: 0}
-  spawnLocation: {fileID: 0}
+  isSpawning: 0
+  player: {fileID: 6550175941366969138, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
   enemyPrefabs:
   - {fileID: 4885495403049249818, guid: 18cfdd964e8777740892ec1fc5979ebe, type: 3}
-  - {fileID: 1074799338644297899, guid: f89a9793e1e3f6541a417fc75e2c136f, type: 3}
+  - {fileID: 4787498873389245740, guid: c11f01fa0316e644188a533795fd8210, type: 3}
   inRange: 5

@@ -29,6 +29,16 @@ public class PlayerController : MonoBehaviour
         transform.rotation = playerAim;
 
         // Animation
+
+        if(movement == new Vector2(0, 0))
+        {
+            animator.enabled = false;
+        }
+        else
+        {
+            animator.enabled = true;
+        }
+
         //animator.SetFloat("Horizontal", movement.x);
         //animator.SetFloat("Vertical", movement.y);
         //animator.SetFloat("Speed", movement.sqrMagnitude);

@@ -183,6 +183,7 @@ public class SwordController : MonoBehaviour
         {
             currentAttack.transform.rotation = Quaternion.Euler(0, 0, i * multiplier) * transform.parent.transform.rotation;
             yield return new WaitForSeconds(0.005f);
+            Destroy(currentAttack, 3);
         }
 
         Destroy(currentAttack);

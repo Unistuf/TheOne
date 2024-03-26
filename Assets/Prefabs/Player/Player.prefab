@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 1631481679444945780}
   - component: {fileID: 5650022923129805490}
   - component: {fileID: 7934003177671274342}
-  - component: {fileID: 1316241121151930467}
+  - component: {fileID: 2571311532456727168}
   - component: {fileID: 5100263306830594133}
   - component: {fileID: 4268820599799069819}
-  - component: {fileID: 2046942062023856965}
   - component: {fileID: 502297560333875000}
   - component: {fileID: 6422914519831327085}
   m_Layer: 6
@@ -154,7 +153,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!95 &1316241121151930467
+--- !u!95 &2571311532456727168
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -164,7 +163,7 @@ Animator:
   m_GameObject: {fileID: 6550175941366969138}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5c9f902ae8e5ed4c9068e0f346191df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -188,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: f1c853a4a1d6f6a4694d55643516dbf3, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -264,6 +263,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9a3c83d0-9a42-4400-ac98-61a9f488a3b5
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cb4e6abb-b763-40b0-b2e1-b45b46956bc7
+    m_ActionName: Player/Interact
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d3ab890e-9529-42a4-be97-ad24c5247236
+    m_ActionName: Player/Cancel
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05889497-744d-4bad-9ebd-3dbc4b93e1f6
+    m_ActionName: Player/Use Item/Potion
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: adc44291-572d-41a4-9ff7-79f230b6b025
+    m_ActionName: Player/Pause/Menu
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -282,24 +297,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  animator: {fileID: 0}
---- !u!114 &2046942062023856965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6550175941366969138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c14f8f38a123d4a91f75337110aa74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  animator: {fileID: 2571311532456727168}
   playerHealth: {fileID: 502297560333875000}
-  attackCooldown: 0.5
+  rb: {fileID: 5650022923129805490}
   zoneWidth: 0.3
   zoneHeight: 0.8
   comboString: 
+  attackCooldown: 0.5
   ThrustHitbox: {fileID: 4751093388067465767, guid: 977c5802a7acbac48b68b696417aaf8d, type: 3}
   SwingHitbox: {fileID: 4379702804263771213, guid: 36e1cb6462e85fd489b55840ec477c6c, type: 3}
   ParryHitbox: {fileID: 0}

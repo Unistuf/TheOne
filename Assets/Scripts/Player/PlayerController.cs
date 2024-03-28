@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Animator animator;
-    public PlayerControls controls;
     public PlayerHealth playerHealth;
     public Rigidbody2D rb;
 
@@ -73,17 +72,17 @@ public class PlayerController : MonoBehaviour
     }
 
     // Use our Move action from the new input system to get our input
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext value)
     {
         // Grab the value of the left stick, and apply it as velocity to our RB
-        movement = value.Get<Vector2>();
+        movement = value.ReadValue<Vector2>();
         rb.velocity = movement * moveSpeed;
     }
 
-    public void OnSwordSwing(InputValue value)
+    public void OnSwordSwing(InputAction.CallbackContext value)
     {
         // Collect the input value of our right stick
-        rStickPos = value.Get<Vector2>();
+        rStickPos = value.ReadValue<Vector2>();
 
         // And then check if it is inside the bounds of any of these "zones" at the top, right, bottom, and left edges of our analogue stick
         // Each zone is labeled ABCD respectively, and N is the "neutral" zone representing the centre of the stick

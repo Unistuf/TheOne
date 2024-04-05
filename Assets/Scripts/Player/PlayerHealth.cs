@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class PlayerHealth : MonoBehaviour
     [Header("Safezone Immortal Flag")]
     public bool isImmortal = false;
 
+    [Header("Items")]
+    public int hpPotion;
+    public int armour;
+    public int maxArmour;
+    public TextMeshProUGUI hpPotionText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,25 +28,46 @@ public class PlayerHealth : MonoBehaviour
         health = maxHealth;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown("q")) //TEMP KEY BINDING, IM NOT TOUCHING THAT INPUT SYSTEM, PLS CHANGE
+        {
+            if (health < maxHealth)
+            {
+                hpPotion -= 1;
+                ApplyHealing(50);
+            }
+        }
+
+        hpPotionText.text = " x " + hpPotion;
+    }
+
     // Apply damage to the player with this function
     public void ApplyDamage(float damage)
     {
         if (!isImmortal) //check if the player isnt immortal
         {
-            // Take the damage
-            health -= damage;
-
-            // Then check if we are dead
-            if (health <= 0)
+            if (armour <= 0)//Check if the player has armour
             {
-                // Cap our health at 0
-                health = 0;
+                // Take the damage
+                health -= damage;
 
-                // Then set ourselves to inactive if we should
-                if (setInactiveOnDeath)
-                {
-                    gameObject.SetActive(false);
+                // Then check if we are dead
+                if (health <= 0)
+                {   
+                    // Cap our health at 0
+                    health = 0;
+
+                    // Then set ourselves to inactive if we should
+                    if (setInactiveOnDeath)
+                    {
+                        gameObject.SetActive(false);
+                    }
                 }
+            }
+            else
+            {
+                armour -= 1; //Remove armour if the player has it
             }
         }
     }
@@ -74,6 +102,19 @@ public class PlayerHealth : MonoBehaviour
         if (col.gameObject.tag == "safeZone")
         {
             isImmortal = true;
+        }
+        else if (col.gameObject.tag == "HpPotion")
+        {
+            hpPotion += 1;
+            Destroy(col.gameObject);
+        }
+        else if (col.gameObject.tag == "Armour")
+        {
+            if (armour < maxArmour)
+            {
+                armour += 1;
+                Destroy(col.gameObject);
+            }
         }
     }
 

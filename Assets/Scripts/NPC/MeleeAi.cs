@@ -6,6 +6,8 @@ public class MeleeAi : MonoBehaviour
 {
     public GameObject player;
     public Transform target;
+    public GameObject hpBottleDrop;
+    public float hpBottleDropChance;
 
     [Header("Enemy Config")]
     public float aggroRange;
@@ -59,6 +61,10 @@ public class MeleeAi : MonoBehaviour
 
     void DoDeath()
     {
+        if (hpBottleDropChance > Random.Range(0,100))
+        {
+            Instantiate(hpBottleDrop, transform.position, transform.rotation);
+        }
         //Death code
         Destroy(this.gameObject);
     }

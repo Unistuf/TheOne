@@ -26,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set health to max on start
         health = maxHealth;
+
+        StartCoroutine(SafeZoneHealing()); //Start the Safe zone healing loop
     }
 
     void Update()
@@ -99,7 +101,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col) 
     {
-        if (col.gameObject.tag == "safeZone")
+        if (col.gameObject.tag == "CampfireRadius")
         {
             isImmortal = true;
         }
@@ -120,7 +122,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "safeZone")
+        if (col.gameObject.tag == "CampfireRadius")
         {
             isImmortal = false;
         }

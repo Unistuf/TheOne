@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - HpPotion
   - Armour
+  - CampfireRadius
   layers:
   - Default
   - TransparentFX

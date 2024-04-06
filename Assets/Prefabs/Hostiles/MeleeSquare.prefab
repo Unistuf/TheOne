@@ -105,7 +105,7 @@ MonoBehaviour:
   hpBottleDropChance: 5
   aggroRange: 25
   healthPoints: 5
-  movementSpeed: 3.75
+  movementSpeed: 2
   attackRange: 1
 --- !u!61 &-1439125470918512453
 BoxCollider2D:

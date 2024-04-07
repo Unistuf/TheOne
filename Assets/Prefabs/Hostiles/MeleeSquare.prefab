@@ -107,6 +107,7 @@ MonoBehaviour:
   healthPoints: 5
   movementSpeed: 2
   attackRange: 1
+  xpGain: 1
 --- !u!61 &-1439125470918512453
 BoxCollider2D:
   m_ObjectHideFlags: 0

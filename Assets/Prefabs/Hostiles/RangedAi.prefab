@@ -129,6 +129,7 @@ MonoBehaviour:
   attackRangeMin: 1
   attackRangeMax: 3
   attackCooldown: 2
+  xpGain: 2
 --- !u!1 &8053716598384743888
 GameObject:
   m_ObjectHideFlags: 0

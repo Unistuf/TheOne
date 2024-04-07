@@ -15,6 +15,9 @@ public class MeleeAi : MonoBehaviour
     public float movementSpeed;
     public float attackRange;
 
+    [Header("Xp")]
+    public int xpGain;
+
     void Start()
     {
         player = GameObject.Find("Player");
@@ -66,6 +69,8 @@ public class MeleeAi : MonoBehaviour
             Instantiate(hpBottleDrop, transform.position, transform.rotation);
         }
         //Death code
+
+        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
         Destroy(this.gameObject);
     }
 }

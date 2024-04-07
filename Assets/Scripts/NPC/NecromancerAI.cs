@@ -5,7 +5,7 @@ using UnityEngine;
 public class NecromancerAI : MonoBehaviour
 {
     [Header("Base Stats")]
-    public int health;
+    public float health;
     public float fireRate;
     public float aggroRange;
     public float projectileLife;
@@ -30,6 +30,9 @@ public class NecromancerAI : MonoBehaviour
     public bool isAggro;
     private GameObject player;
     private int shotsFired;
+
+    [Header("Xp")]
+    public int xpGain;
 
     void Start()
     {
@@ -118,5 +121,21 @@ public class NecromancerAI : MonoBehaviour
         }
 
         StartCoroutine(DeadSummonCD());
+    }
+
+    public void DoDamage(float damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            DoDeath();
+        }
+    }
+
+    void DoDeath()
+    {
+        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
+        Destroy(this.gameObject);
     }
 }

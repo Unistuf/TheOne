@@ -21,6 +21,7 @@ public class XpLevelSystem : MonoBehaviour
 
     [Header("Runtime")]
     public float xpRequired; // y
+    public PlayerHealth playerHealth;
 
 
     void Update()
@@ -49,6 +50,11 @@ public class XpLevelSystem : MonoBehaviour
     {
         currentPlayerXp -= xpRequired;
         currentPlayerLevel += 1;
+
+        
+        playerHealth.IncreaseMaxHealth(10);
+        playerHealth.ApplyHealing(10);
+        playerHealth.hpPotion += 2;
     }
 
 

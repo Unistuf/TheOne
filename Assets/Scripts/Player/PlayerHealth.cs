@@ -24,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);//Allow the player to continue through scenes
+
         // Set health to max on start
         health = maxHealth;
 
@@ -85,6 +87,11 @@ public class PlayerHealth : MonoBehaviour
         {
             health = maxHealth;
         }
+    }
+
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHealth += amount;
     }
 
     IEnumerator SafeZoneHealing()

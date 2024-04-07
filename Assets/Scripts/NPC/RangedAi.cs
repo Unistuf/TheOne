@@ -19,6 +19,9 @@ public class RangedAi : MonoBehaviour
     public float attackRangeMax;
     public float attackCooldown;
 
+    [Header("Xp")]
+    public int xpGain;
+
 
     void Start()
     {
@@ -105,7 +108,7 @@ public class RangedAi : MonoBehaviour
         }
 
         //Death code
-        player.GetComponent<XpLevelSystem>().AddPlayerXp(3);
+        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
         Destroy(this.gameObject);
     }
 }

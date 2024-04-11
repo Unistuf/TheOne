@@ -21,15 +21,46 @@ public class PlayerHealth : MonoBehaviour
     public int maxArmour;
     public TextMeshProUGUI hpPotionText;
 
+    [Header(("SaveData"))]
+    public XpLevelSystem xpSystem;
+
     // Start is called before the first frame update
     void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);//Allow the player to continue through scenes
-
+    {       
         // Set health to max on start
         health = maxHealth;
 
         StartCoroutine(SafeZoneHealing()); //Start the Safe zone healing loop
+        LoadSave();
+    }
+
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll(); //Delete level persistant data
+    }
+
+    public void LoadSave()
+    {
+        maxHealth = PlayerPrefs.GetFloat("maxHealth", 100);
+        health = PlayerPrefs.GetFloat("health", 100);
+
+        hpPotion = PlayerPrefs.GetInt("hpPotion", 0);
+        armour = PlayerPrefs.GetInt("armour", 0);
+
+        xpSystem.currentPlayerXp = PlayerPrefs.GetFloat("currentXp", 0);
+        xpSystem.currentPlayerLevel = PlayerPrefs.GetInt("currentLevel", 0);
+    }
+
+    public void SaveGame()
+    {
+        PlayerPrefs.SetFloat("maxHealth", maxHealth);
+        PlayerPrefs.SetFloat("health", health);
+
+        PlayerPrefs.SetInt("hpPotion", hpPotion);
+        PlayerPrefs.SetInt("armour", armour);
+
+        PlayerPrefs.SetFloat("currentXp", xpSystem.currentPlayerXp);
+        PlayerPrefs.SetInt("currentLevel", xpSystem.currentPlayerLevel);
     }
 
     void Update()
@@ -67,6 +98,8 @@ public class PlayerHealth : MonoBehaviour
                     {
                         gameObject.SetActive(false);
                     }
+
+                    PlayerPrefs.DeleteAll(); //Delete level persistant data
                 }
             }
             else

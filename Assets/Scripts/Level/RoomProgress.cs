@@ -11,6 +11,7 @@ public class RoomProgress : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            other.gameObject.GetComponent<PlayerHealth>().SaveGame();
             SceneManager.LoadScene(nextSceneNumber);
         }
     }

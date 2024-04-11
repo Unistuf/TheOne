@@ -360,6 +360,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 218402668271041780, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: xpSystem
+      value: 
+      objectReference: {fileID: 277116333}
+    - target: {fileID: 218402668271041780, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
       propertyPath: hpPotionText
       value: 
       objectReference: {fileID: 557770832}
@@ -367,6 +371,10 @@ PrefabInstance:
       propertyPath: ProgressBar
       value: 
       objectReference: {fileID: 524246478}
+    - target: {fileID: 3302763219626040611, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 277116334}
     - target: {fileID: 3302763219626040611, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
       propertyPath: xpAmountText
       value: 
@@ -657,6 +665,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7778694760695223324, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
   m_PrefabInstance: {fileID: 58428726}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &277116333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3302763219626040611, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+  m_PrefabInstance: {fileID: 58428726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277116323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2167a5ebb0647744faae904cadb22406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &277116334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 218402668271041780, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+  m_PrefabInstance: {fileID: 58428726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277116323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc0800f0fdb2642478d5aead7a3fbf75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &341325308
 GameObject:
   m_ObjectHideFlags: 0

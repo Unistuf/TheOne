@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,11 +15,66 @@ public class PlayerHealth : MonoBehaviour
     [Header("Safezone Immortal Flag")]
     public bool isImmortal = false;
 
+    [Header("Items")]
+    public int hpPotion;
+    public int armour;
+    public int maxArmour;
+    public TextMeshProUGUI hpPotionText;
+
+    [Header(("SaveData"))]
+    public XpLevelSystem xpSystem;
+
     // Start is called before the first frame update
     void Start()
-    {
+    {       
         // Set health to max on start
         health = maxHealth;
+
+        StartCoroutine(SafeZoneHealing()); //Start the Safe zone healing loop
+        LoadSave();
+    }
+
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll(); //Delete level persistant data
+    }
+
+    public void LoadSave()
+    {
+        maxHealth = PlayerPrefs.GetFloat("maxHealth", 100);
+        health = PlayerPrefs.GetFloat("health", 100);
+
+        hpPotion = PlayerPrefs.GetInt("hpPotion", 0);
+        armour = PlayerPrefs.GetInt("armour", 0);
+
+        xpSystem.currentPlayerXp = PlayerPrefs.GetFloat("currentXp", 0);
+        xpSystem.currentPlayerLevel = PlayerPrefs.GetInt("currentLevel", 0);
+    }
+
+    public void SaveGame()
+    {
+        PlayerPrefs.SetFloat("maxHealth", maxHealth);
+        PlayerPrefs.SetFloat("health", health);
+
+        PlayerPrefs.SetInt("hpPotion", hpPotion);
+        PlayerPrefs.SetInt("armour", armour);
+
+        PlayerPrefs.SetFloat("currentXp", xpSystem.currentPlayerXp);
+        PlayerPrefs.SetInt("currentLevel", xpSystem.currentPlayerLevel);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("q")) //TEMP KEY BINDING, IM NOT TOUCHING THAT INPUT SYSTEM, PLS CHANGE
+        {
+            if (health < maxHealth)
+            {
+                hpPotion -= 1;
+                ApplyHealing(50);
+            }
+        }
+
+        hpPotionText.text = " x " + hpPotion;
     }
 
     // Apply damage to the player with this function
@@ -26,20 +82,29 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isImmortal) //check if the player isnt immortal
         {
-            // Take the damage
-            health -= damage;
-
-            // Then check if we are dead
-            if (health <= 0)
+            if (armour <= 0)//Check if the player has armour
             {
-                // Cap our health at 0
-                health = 0;
+                // Take the damage
+                health -= damage;
 
-                // Then set ourselves to inactive if we should
-                if (setInactiveOnDeath)
-                {
-                    gameObject.SetActive(false);
+                // Then check if we are dead
+                if (health <= 0)
+                {   
+                    // Cap our health at 0
+                    health = 0;
+
+                    // Then set ourselves to inactive if we should
+                    if (setInactiveOnDeath)
+                    {
+                        gameObject.SetActive(false);
+                    }
+
+                    PlayerPrefs.DeleteAll(); //Delete level persistant data
                 }
+            }
+            else
+            {
+                armour -= 1; //Remove armour if the player has it
             }
         }
     }
@@ -57,6 +122,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHealth += amount;
+    }
+
     IEnumerator SafeZoneHealing()
     {
         if (isImmortal)
@@ -71,15 +141,28 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col) 
     {
-        if (col.gameObject.tag == "safeZone")
+        if (col.gameObject.tag == "CampfireRadius")
         {
             isImmortal = true;
+        }
+        else if (col.gameObject.tag == "HpPotion")
+        {
+            hpPotion += 1;
+            Destroy(col.gameObject);
+        }
+        else if (col.gameObject.tag == "Armour")
+        {
+            if (armour < maxArmour)
+            {
+                armour += 1;
+                Destroy(col.gameObject);
+            }
         }
     }
 
     public void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "safeZone")
+        if (col.gameObject.tag == "CampfireRadius")
         {
             isImmortal = false;
         }

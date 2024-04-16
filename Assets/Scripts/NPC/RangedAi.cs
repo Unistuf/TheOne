@@ -6,6 +6,8 @@ public class RangedAi : MonoBehaviour
 {
     public GameObject player;
     public GameObject projectilePrefab;
+    public GameObject hpBottleDrop;
+    public float hpBottleDropChance;
 
     bool isAttacking;
 
@@ -16,6 +18,10 @@ public class RangedAi : MonoBehaviour
     public float attackRangeMin;
     public float attackRangeMax;
     public float attackCooldown;
+
+    [Header("Xp")]
+    public int xpGain;
+
 
     void Start()
     {
@@ -96,8 +102,13 @@ public class RangedAi : MonoBehaviour
 
     void DoDeath()
     {
+        if (hpBottleDropChance > Random.Range(0,100))
+        {
+            Instantiate(hpBottleDrop, transform.position, transform.rotation);
+        }
+
         //Death code
-        player.GetComponent<XpLevelSystem>().AddPlayerXp(3);
+        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
         Destroy(this.gameObject);
     }
 }

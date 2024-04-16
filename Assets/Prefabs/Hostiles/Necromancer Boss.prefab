@@ -309,6 +309,7 @@ MonoBehaviour:
   meleeAi: {fileID: 4885495403049249818, guid: 18cfdd964e8777740892ec1fc5979ebe, type: 3}
   rangedAi: {fileID: 1074799338644297899, guid: f89a9793e1e3f6541a417fc75e2c136f, type: 3}
   isAggro: 0
+  xpGain: 20
 --- !u!1 &5565091102047032127
 GameObject:
   m_ObjectHideFlags: 0

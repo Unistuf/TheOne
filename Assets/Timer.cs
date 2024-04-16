@@ -40,6 +40,6 @@ public class PlayTimer : MonoBehaviour
         int minutes = Mathf.FloorToInt(elapsedTime / 60);
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
 
-        timeText.text = string.Format("{00:00:00}:{1:00}", minutes, seconds);
+        timeText.text = string.Format("{00:00:00}:{1:00:00}", minutes, seconds);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3071674513516301391}
   - component: {fileID: -9066085102608982355}
   - component: {fileID: 3345171260718276104}
+  - component: {fileID: -6773905759175576952}
   m_Layer: 0
   m_Name: RangedAi
   m_TagString: Enemy
@@ -130,6 +131,18 @@ MonoBehaviour:
   attackRangeMax: 3
   attackCooldown: 2
   xpGain: 2
+--- !u!114 &-6773905759175576952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787498873389245740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ac7e19b2e1c5940b3b0bd570e628dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8053716598384743888
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,21 +7,16 @@ public class MeleeAI : MonoBehaviour
 {
     public GameObject player;
     public Transform target;
-    public GameObject hpBottleDrop;
-    public float hpBottleDropChance;
 
     [Header("Enemy Config")]
     public float aggroRange;
-    public float healthPoints;
     public float movementSpeed;
     public float attackRange;
-
-    [Header("Xp")]
-    public int xpGain;
 
     void Start()
     {
         player = GameObject.Find("Player");
+        target = player.transform;
     }
 
     void Update()
@@ -56,27 +51,5 @@ public class MeleeAI : MonoBehaviour
     {
         //Attack code goes in here
         Debug.Log("MeleeAttack");
-    }
-
-    public void DoDamage(float damage)
-    {
-        healthPoints -= damage;
-
-        if (healthPoints <= 0)
-        {
-            DoDeath();
-        }
-    }
-
-    void DoDeath()
-    {
-        if (hpBottleDropChance > Random.Range(0,100))
-        {
-            Instantiate(hpBottleDrop, transform.position, transform.rotation);
-        }
-        //Death code
-
-        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
-        Destroy(this.gameObject);
     }
 }

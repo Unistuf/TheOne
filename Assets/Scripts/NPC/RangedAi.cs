@@ -6,21 +6,15 @@ public class RangedAI : MonoBehaviour
 {
     public GameObject player;
     public GameObject projectilePrefab;
-    public GameObject hpBottleDrop;
-    public float hpBottleDropChance;
 
     bool isAttacking;
 
     [Header("Enemy Config")]
     public float aggroRange;
-    public float healthPoints;
     public float movementSpeed;
     public float attackRangeMin;
     public float attackRangeMax;
     public float attackCooldown;
-
-    [Header("Xp")]
-    public int xpGain;
 
 
     void Start()

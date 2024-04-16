@@ -122,15 +122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   projectilePrefab: {fileID: 2038009405350806380, guid: 60dc7ffbb7cf6254fa1278cf141d38a3, type: 3}
-  hpBottleDrop: {fileID: 7457218479614347411, guid: e102192b08e16094ea4261926236d959, type: 3}
-  hpBottleDropChance: 5
   aggroRange: 5
-  healthPoints: 5
   movementSpeed: 2
   attackRangeMin: 1
   attackRangeMax: 3
   attackCooldown: 2
-  xpGain: 2
 --- !u!114 &-6773905759175576952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ac7e19b2e1c5940b3b0bd570e628dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 10
+  hpBottleDrop: {fileID: 7457218479614347411, guid: e102192b08e16094ea4261926236d959, type: 3}
+  hpBottleDropChance: 5
+  player: {fileID: 0}
+  xpGain: 8
 --- !u!1 &8053716598384743888
 GameObject:
   m_ObjectHideFlags: 0

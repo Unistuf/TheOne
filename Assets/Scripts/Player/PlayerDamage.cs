@@ -21,8 +21,7 @@ public class PlayerDamage : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            collision.GetComponent<RangedAI>().DoDamage(attackDamage);
-            collision.GetComponent<MeleeAI>().DoDamage(attackDamage);
+            collision.GetComponent<EnemyHealth>().DoDamage(attackDamage);
         }
     }
 }

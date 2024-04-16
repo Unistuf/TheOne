@@ -83,26 +83,4 @@ public class RangedAI : MonoBehaviour
             isAttacking = false;
         }
     }
-
-    public void DoDamage(float damage)
-    {
-        healthPoints -= damage;
-
-        if (healthPoints <= 0)
-        {
-            DoDeath();
-        }
-    }
-
-    void DoDeath()
-    {
-        if (hpBottleDropChance > Random.Range(0,100))
-        {
-            Instantiate(hpBottleDrop, transform.position, transform.rotation);
-        }
-
-        //Death code
-        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
-        Destroy(this.gameObject);
-    }
 }

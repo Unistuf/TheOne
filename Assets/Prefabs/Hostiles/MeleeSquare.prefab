@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 661401277958424085}
   - component: {fileID: -1439125470918512453}
   - component: {fileID: -8284097154329081064}
-  - component: {fileID: 4191572819930712639}
+  - component: {fileID: 3334833347589944921}
   m_Layer: 0
   m_Name: MeleeSquare
   m_TagString: Enemy
@@ -102,13 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   target: {fileID: 0}
-  hpBottleDrop: {fileID: 7457218479614347411, guid: e102192b08e16094ea4261926236d959, type: 3}
-  hpBottleDropChance: 5
   aggroRange: 25
-  healthPoints: 5
   movementSpeed: 1.8
   attackRange: 1
-  xpGain: 1
 --- !u!61 &-1439125470918512453
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,7 +177,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4191572819930712639
+--- !u!114 &3334833347589944921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,3 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ac7e19b2e1c5940b3b0bd570e628dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 15
+  hpBottleDrop: {fileID: 7457218479614347411, guid: e102192b08e16094ea4261926236d959, type: 3}
+  hpBottleDropChance: 5
+  player: {fileID: 0}
+  xpGain: 5

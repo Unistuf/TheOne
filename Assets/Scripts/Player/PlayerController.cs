@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] string comboString = string.Empty;
     [SerializeField] float attackCooldown = 0.5f;
-    bool attackEnabled;
+    bool attackEnabled = true;
 
     public GameObject ThrustHitbox;
     public GameObject SwingHitbox;
@@ -176,20 +176,32 @@ public class PlayerController : MonoBehaviour
             if (attackID == 0)
             {
                 StartCoroutine(ThrustAttack());
+                attackEnabled = false;
+                yield return new WaitForSeconds(0.15f);
+                attackEnabled = true;
             }
             if (attackID == 1)
             {
                 StartCoroutine(SwingAttack(true));
+                attackEnabled = false;
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
             }
             if (attackID == 3)
             {
                 StartCoroutine(SwingAttack(false));
+                attackEnabled = false;
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
             }
             if (attackID == 4)
             {
                 StartCoroutine(ThrustAttack());
+                attackEnabled = false;
                 yield return new WaitForSeconds(0.2f);
                 StartCoroutine(ThrustAttack());
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
             }
         }
 

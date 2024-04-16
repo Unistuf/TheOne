@@ -28,12 +28,8 @@ public class PlayerHealth : MonoBehaviour
 
     [Header(("UI"))]
     public Image healthBarImage;
-    public Slider healthSlider;
-    public Sprite hpSprite1;
-    public Sprite hpSprite2;
-    public Sprite hpSprite3;
-    public Sprite hpSprite4;
-    public Sprite hpSprite5;
+    public Image healthSlider;
+    public Sprite[] hpSprites;
 
     // Start is called before the first frame update
     void Start()
@@ -77,26 +73,26 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         hpPotionText.text = " x " + hpPotion;
-
-        if (health >= maxHealth * 0.8f)
+        
+        if (health == 0f)
         {
-            healthBarImage.sprite = hpSprite1;
+            healthBarImage.sprite = hpSprites[4];
         }
-        else if (health >= maxHealth * 0.6f)
+        else if (health < 20)
         {
-            healthBarImage.sprite = hpSprite2;
+            healthBarImage.sprite = hpSprites[3];
         }
-        else if (health >= maxHealth * 0.4f)
+        else if (health < 40)
         {
-            healthBarImage.sprite = hpSprite3;
+            healthBarImage.sprite = hpSprites[2];
         }
-        else if (health >= maxHealth * 0.2f)
+        else if (health < 60)
         {
-            healthBarImage.sprite = hpSprite4;
+            healthBarImage.sprite = hpSprites[1];
         }
-        else if (health >= 0f)
+        else if (health >= 80)
         {
-            healthBarImage.sprite = hpSprite5;
+            healthBarImage.sprite = hpSprites[0];
         }
     }
 
@@ -109,7 +105,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 // Take the damage
                 health -= damage;
-                healthSlider.value = health * 0.01f;
+                // healthSlider.value = health * 0.01f;
+
+                healthSlider.fillAmount = health / maxHealth;
 
                 // Then check if we are dead
                 if (health <= 0)

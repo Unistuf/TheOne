@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +13,8 @@ public class MeleeAI : MonoBehaviour
     public float aggroRange;
     public float movementSpeed;
     public float attackRange;
+
+    float angle;
 
     void Start()
     {
@@ -31,17 +34,14 @@ public class MeleeAI : MonoBehaviour
             {
                 float movementStep = movementSpeed / 100;
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementStep);
-
-                Vector2 aimDirection = player.transform.position - transform.position;
-                transform.rotation = Quaternion.Euler(aimDirection);
             }
 
-            // Needs Fixing because i cant figure out why it wont rotate on the fucking Z AXIS!!!!!!!!!
-
-            //if (target != null)
-            //{
-            //    // transform.forward(target);
-            //}
+            if (target != null)
+            {
+                Vector2 aimDirection = player.transform.position - transform.position;
+                angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            }
         }
 
         

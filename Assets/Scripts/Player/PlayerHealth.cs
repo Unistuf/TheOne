@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -23,6 +24,15 @@ public class PlayerHealth : MonoBehaviour
 
     [Header(("SaveData"))]
     public XpLevelSystem xpSystem;
+
+    [Header(("UI"))]
+    public Image healthBarImage;
+    public Slider healthSlider;
+    public Sprite hpSprite1;
+    public Sprite hpSprite2;
+    public Sprite hpSprite3;
+    public Sprite hpSprite4;
+    public Sprite hpSprite5;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +85,27 @@ public class PlayerHealth : MonoBehaviour
         }
 
         hpPotionText.text = " x " + hpPotion;
+
+        if (health >= maxHealth * 0.8f)
+        {
+            healthBarImage.sprite = hpSprite1;
+        }
+        else if (health >= maxHealth * 0.6f)
+        {
+            healthBarImage.sprite = hpSprite2;
+        }
+        else if (health >= maxHealth * 0.4f)
+        {
+            healthBarImage.sprite = hpSprite3;
+        }
+        else if (health >= maxHealth * 0.2f)
+        {
+            healthBarImage.sprite = hpSprite4;
+        }
+        else if (health >= 0)
+        {
+            healthBarImage.sprite = hpSprite5;
+        }
     }
 
     // Apply damage to the player with this function
@@ -86,6 +117,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 // Take the damage
                 health -= damage;
+                healthSlider.value = health * 0.01f;
 
                 // Then check if we are dead
                 if (health <= 0)

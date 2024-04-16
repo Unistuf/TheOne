@@ -102,7 +102,7 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBarImage.sprite = hpSprite4;
         }
-        else if (health >= 0)
+        else if (health >= 0f)
         {
             healthBarImage.sprite = hpSprite5;
         }

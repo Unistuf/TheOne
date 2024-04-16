@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] string comboString = string.Empty;
     [SerializeField] float attackCooldown = 0.5f;
+    bool attackEnabled;
 
     public GameObject ThrustHitbox;
     public GameObject SwingHitbox;
@@ -81,31 +82,34 @@ public class PlayerController : MonoBehaviour
 
     public void OnSwordSwing(InputAction.CallbackContext value)
     {
-        // Collect the input value of our right stick
-        rStickPos = value.ReadValue<Vector2>();
+        if (attackEnabled)
+        {
+            // Collect the input value of our right stick
+            rStickPos = value.ReadValue<Vector2>();
 
-        // And then check if it is inside the bounds of any of these "zones" at the top, right, bottom, and left edges of our analogue stick
-        // Each zone is labeled ABCD respectively, and N is the "neutral" zone representing the centre of the stick
-        // The exact bounds of these boxes can be tuned with zoneHeight and zoneWidth
-        if (rStickPos.y >= zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth)
-        {
-            StartCoroutine(SwordAttacks("A"));
-        }
-        if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x >= zoneHeight)
-        {
-            StartCoroutine(SwordAttacks("B"));
-        }
-        if (rStickPos.y <= -zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth)
-        {
-            StartCoroutine(SwordAttacks("C"));
-        }
-        if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x <= -zoneHeight)
-        {
-            StartCoroutine(SwordAttacks("D"));
-        }
-        if (rStickPos.y <= zoneHeight && rStickPos.y >= -zoneHeight && rStickPos.x <= zoneHeight && rStickPos.x >= -zoneHeight)
-        {
-            StartCoroutine(SwordAttacks("N"));
+            // And then check if it is inside the bounds of any of these "zones" at the top, right, bottom, and left edges of our analogue stick
+            // Each zone is labeled ABCD respectively, and N is the "neutral" zone representing the centre of the stick
+            // The exact bounds of these boxes can be tuned with zoneHeight and zoneWidth
+            if (rStickPos.y >= zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth)
+            {
+                StartCoroutine(SwordAttacks("A"));
+            }
+            if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x >= zoneHeight)
+            {
+                StartCoroutine(SwordAttacks("B"));
+            }
+            if (rStickPos.y <= -zoneHeight && rStickPos.x <= zoneWidth && rStickPos.x >= -zoneWidth)
+            {
+                StartCoroutine(SwordAttacks("C"));
+            }
+            if (rStickPos.y <= zoneWidth && rStickPos.y >= -zoneWidth && rStickPos.x <= -zoneHeight)
+            {
+                StartCoroutine(SwordAttacks("D"));
+            }
+            if (rStickPos.y <= zoneHeight && rStickPos.y >= -zoneHeight && rStickPos.x <= zoneHeight && rStickPos.x >= -zoneHeight)
+            {
+                StartCoroutine(SwordAttacks("N"));
+            }
         }
     }
 
@@ -130,7 +134,7 @@ public class PlayerController : MonoBehaviour
                     comboList.TryGetValue(comboString, out int attackID);
 
                     foundOnFirstCheck = true;
-                    StartCoroutine(AttackWithSword(attackID));
+                    StartCoroutine(CheckSwordAttack(attackID));
                 }
 
                 // And if we do not hit a valid combo, just perform the attack of the most recent letter (e.g. if DDC is not a valid combo, just execute C)
@@ -142,7 +146,7 @@ public class PlayerController : MonoBehaviour
                     {
                         comboList.TryGetValue(comboString, out int attackID);
 
-                        StartCoroutine(AttackWithSword(attackID));
+                        StartCoroutine(CheckSwordAttack(attackID));
                     }
                 }
             }
@@ -164,7 +168,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Initiate actual attacks
-    public IEnumerator AttackWithSword(int attackID)
+    public IEnumerator CheckSwordAttack(int attackID)
     {
         if (!playerHealth.isImmortal) // Player cannot attack while immortal
         {
@@ -184,7 +188,7 @@ public class PlayerController : MonoBehaviour
             if (attackID == 4)
             {
                 StartCoroutine(ThrustAttack());
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.2f);
                 StartCoroutine(ThrustAttack());
             }
         }
@@ -199,15 +203,15 @@ public class PlayerController : MonoBehaviour
         currentThrustAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
 
         // Move the hitbox forwards relative to the player
-        for (int i = 0; i < 100; i++)
+       /* for (int i = 0; i < 100; i++)
         {
             currentThrustAttack.transform.localPosition = new Vector3(0, i * 0.025f, 0);
             currentThrustAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
             yield return new WaitForSeconds(0.00005f);
-        }
+        }*/
 
         // And destroy the game object after the attack is complete
-        Destroy(currentThrustAttack);
+        Destroy(currentThrustAttack, 0.15f);
         yield return null;
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedAi : MonoBehaviour
+public class RangedAI : MonoBehaviour
 {
     public GameObject player;
     public GameObject projectilePrefab;

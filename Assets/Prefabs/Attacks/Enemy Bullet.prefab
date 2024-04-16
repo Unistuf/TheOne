@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e18af0a08caed48942faf903298db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 5
   projectileSpeed: 2
   projectileLifespan: 10
   isHoming: 0

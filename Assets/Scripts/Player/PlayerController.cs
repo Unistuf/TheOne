@@ -52,12 +52,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Quaternion playerAim = Quaternion.LookRotation(Vector3.forward, movement);
-
-        transform.rotation = playerAim;
-
         // Animation
-
         if (movement == new Vector2(0, 0))
         {
             animator.enabled = false;
@@ -66,10 +61,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.enabled = true;
         }
-
-        //animator.SetFloat("Horizontal", movement.x);
-        //animator.SetFloat("Vertical", movement.y);
-        //animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     // Use our Move action from the new input system to get our input
@@ -78,6 +69,11 @@ public class PlayerController : MonoBehaviour
         // Grab the value of the left stick, and apply it as velocity to our RB
         movement = value.ReadValue<Vector2>();
         rb.velocity = movement * moveSpeed;
+
+        // And do the same for our rotation
+        Quaternion playerAim = Quaternion.LookRotation(Vector3.forward, movement);
+
+        transform.rotation = playerAim;
     }
 
     public void OnSwordSwing(InputAction.CallbackContext value)

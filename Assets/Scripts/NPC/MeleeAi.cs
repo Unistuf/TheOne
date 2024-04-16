@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeAi : MonoBehaviour
+public class MeleeAI : MonoBehaviour
 {
     public GameObject player;
     public Transform target;
@@ -52,7 +52,7 @@ public class MeleeAi : MonoBehaviour
         Debug.Log("MeleeAttack");
     }
 
-    void DoDamage(float damage)
+    public void DoDamage(float damage)
     {
         healthPoints -= damage;
 

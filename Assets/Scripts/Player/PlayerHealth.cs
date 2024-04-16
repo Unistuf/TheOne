@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -75,15 +76,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("q")) //TEMP KEY BINDING, IM NOT TOUCHING THAT INPUT SYSTEM, PLS CHANGE
-        {
-            if (health < maxHealth)
-            {
-                hpPotion -= 1;
-                ApplyHealing(50);
-            }
-        }
-
         hpPotionText.text = " x " + hpPotion;
 
         if (health >= maxHealth * 0.8f)
@@ -198,5 +190,16 @@ public class PlayerHealth : MonoBehaviour
         {
             isImmortal = false;
         }
+    }
+
+    public void OnUsePotion(InputAction.CallbackContext context)
+    {
+
+        if (health < maxHealth)
+        {
+            hpPotion -= 1;
+            ApplyHealing(50);
+        }
+        
     }
 }

@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ac7e19b2e1c5940b3b0bd570e628dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 10
+  healthPoints: 3
   hpBottleDrop: {fileID: 7457218479614347411, guid: e102192b08e16094ea4261926236d959, type: 3}
   hpBottleDropChance: 5
   player: {fileID: 0}

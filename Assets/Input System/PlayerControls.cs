@@ -270,6 +270,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f342f428-5419-4000-a1fa-3e4c79b8df8c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Item/Potion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ab637710-81c7-4ce3-a655-47ea8bd7a032"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",

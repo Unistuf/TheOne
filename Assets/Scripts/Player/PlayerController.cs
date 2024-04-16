@@ -71,9 +71,13 @@ public class PlayerController : MonoBehaviour
         rb.velocity = movement * moveSpeed;
 
         // And do the same for our rotation
-        Quaternion playerAim = Quaternion.LookRotation(Vector3.forward, movement);
+        if (value.ReadValue<Vector2>() != new Vector2(0, 0))
+        {
+            Quaternion playerAim = Quaternion.LookRotation(Vector3.forward, movement);
 
-        transform.rotation = playerAim;
+            transform.rotation = playerAim;
+        }
+        
     }
 
     public void OnSwordSwing(InputAction.CallbackContext value)

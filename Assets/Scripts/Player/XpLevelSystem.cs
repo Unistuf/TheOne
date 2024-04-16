@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class XpLevelSystem : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class XpLevelSystem : MonoBehaviour
     public float currentPlayerXp;
 
     [Header("UI Elements")]
-    public Slider ProgressBar;
+    public UnityEngine.UI.Slider ProgressBar;
     public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI nextLevelText;
     public TextMeshProUGUI xpAmountText;

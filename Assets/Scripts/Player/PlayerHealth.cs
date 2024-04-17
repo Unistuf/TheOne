@@ -74,23 +74,23 @@ public class PlayerHealth : MonoBehaviour
     {
         hpPotionText.text = " x " + hpPotion;
         
-        if (health == 0f)
+        if (health <= 20f)
         {
             healthBarImage.sprite = hpSprites[4];
         }
-        else if (health < 20)
+        else if (health <= 40)
         {
             healthBarImage.sprite = hpSprites[3];
         }
-        else if (health < 40)
+        else if (health <= 60)
         {
             healthBarImage.sprite = hpSprites[2];
         }
-        else if (health < 60)
+        else if (health <= 80)
         {
             healthBarImage.sprite = hpSprites[1];
         }
-        else if (health >= 80)
+        else if (health <= 100)
         {
             healthBarImage.sprite = hpSprites[0];
         }

@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
             if (inZone != "N")
             {
                 comboString += inZone;
+                //Debug.Log(comboString);
                 bool foundOnFirstCheck = false;
 
                 // Then, check current the combo against the combo list, and perform any attack or combo that we "hit" at each stage
@@ -144,7 +145,8 @@ public class PlayerController : MonoBehaviour
 
                     if (comboList.ContainsKey(lastAttack))
                     {
-                        comboList.TryGetValue(comboString, out int attackID);
+                        Debug.Log(lastAttack);
+                        comboList.TryGetValue(lastAttack, out int attackID);
 
                         StartCoroutine(CheckSwordAttack(attackID));
                     }
@@ -182,14 +184,14 @@ public class PlayerController : MonoBehaviour
             }
             if (attackID == 1)
             {
-                StartCoroutine(SwingAttack(true));
+                StartCoroutine(SwingAttack(true, 0));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
             if (attackID == 3)
             {
-                StartCoroutine(SwingAttack(false));
+                StartCoroutine(SwingAttack(false, 0));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
@@ -214,21 +216,13 @@ public class PlayerController : MonoBehaviour
         GameObject currentThrustAttack = Instantiate(ThrustHitbox, transform);
         currentThrustAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
 
-        // Move the hitbox forwards relative to the player
-       /* for (int i = 0; i < 100; i++)
-        {
-            currentThrustAttack.transform.localPosition = new Vector3(0, i * 0.025f, 0);
-            currentThrustAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
-            yield return new WaitForSeconds(0.00005f);
-        }*/
-
         // And destroy the game object after the attack is complete
         Destroy(currentThrustAttack, 0.15f);
         yield return null;
     }
 
     // Swing attack logic
-    public IEnumerator SwingAttack(bool isRight)
+    public IEnumerator SwingAttack(bool isRight, float startPos)
     {
         GameObject currentSwingAttack = Instantiate(SwingHitbox, transform);
         currentSwingAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
@@ -239,14 +233,13 @@ public class PlayerController : MonoBehaviour
         {
             multiplier = -multiplier;
         }
-        //asdhahs
         for (int i = 0; i <= 45; i++)
         {
             currentSwingAttack.transform.localRotation = Quaternion.Euler(0, 0, i * multiplier);
             yield return new WaitForSeconds(0.005f);
         }
 
-        Destroy(currentSwingAttack.gameObject); // beeng
+        Destroy(currentSwingAttack.gameObject);
         yield return null;
     }
 

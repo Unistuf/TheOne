@@ -22,6 +22,11 @@ public class PlayerDamage : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<EnemyHealth>().DoDamage(attackDamage);
+
+            Vector2 aimDirection = transform.parent.transform.position - collision.transform.position;
+            float angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+
+            collision.GetComponent<Rigidbody2D>().velocity = -aimDirection.normalized * 10;
         }
     }
 }

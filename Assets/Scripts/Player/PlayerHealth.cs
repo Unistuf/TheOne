@@ -74,26 +74,28 @@ public class PlayerHealth : MonoBehaviour
     {
         hpPotionText.text = " x " + hpPotion;
         
-        if (health <= 20f)
+        if (health <= maxHealth * 0.2f)
         {
             healthBarImage.sprite = hpSprites[4];
         }
-        else if (health <= 40)
+        else if (health <= maxHealth * 0.4f)
         {
             healthBarImage.sprite = hpSprites[3];
         }
-        else if (health <= 60)
+        else if (health <= maxHealth * 0.6f)
         {
             healthBarImage.sprite = hpSprites[2];
         }
-        else if (health <= 80)
+        else if (health <= maxHealth * 0.8f)
         {
             healthBarImage.sprite = hpSprites[1];
         }
-        else if (health <= 100)
+        else if (health <= maxHealth)
         {
             healthBarImage.sprite = hpSprites[0];
         }
+
+        healthSlider.fillAmount = health / maxHealth;
     }
 
     // Apply damage to the player with this function
@@ -106,8 +108,6 @@ public class PlayerHealth : MonoBehaviour
                 // Take the damage
                 health -= damage;
                 // healthSlider.value = health * 0.01f;
-
-                healthSlider.fillAmount = health / maxHealth;
 
                 // Then check if we are dead
                 if (health <= 0)
@@ -192,7 +192,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnUsePotion(InputAction.CallbackContext context)
     {
-
+        Debug.Log("guh");
         if (health < maxHealth)
         {
             hpPotion -= 1;

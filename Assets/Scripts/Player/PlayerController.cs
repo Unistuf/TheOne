@@ -125,7 +125,6 @@ public class PlayerController : MonoBehaviour
             if (inZone != "N")
             {
                 comboString += inZone;
-                //Debug.Log(comboString);
                 bool foundOnFirstCheck = false;
 
                 // Then, check current the combo against the combo list, and perform any attack or combo that we "hit" at each stage
@@ -145,7 +144,6 @@ public class PlayerController : MonoBehaviour
 
                     if (comboList.ContainsKey(lastAttack))
                     {
-                        Debug.Log(lastAttack);
                         comboList.TryGetValue(lastAttack, out int attackID);
 
                         StartCoroutine(CheckSwordAttack(attackID));
@@ -184,14 +182,14 @@ public class PlayerController : MonoBehaviour
             }
             if (attackID == 1)
             {
-                StartCoroutine(SwingAttack(true, 0));
+                StartCoroutine(SwingAttack(true, 45));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
             if (attackID == 3)
             {
-                StartCoroutine(SwingAttack(false, 0));
+                StartCoroutine(SwingAttack(false, 45));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
@@ -233,10 +231,10 @@ public class PlayerController : MonoBehaviour
         {
             multiplier = -multiplier;
         }
-        for (int i = 0; i <= 45; i++)
+        for (float i = startPos; i <= i + 45; i++)
         {
             currentSwingAttack.transform.localRotation = Quaternion.Euler(0, 0, i * multiplier);
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.75f * Time.deltaTime);
         }
 
         Destroy(currentSwingAttack.gameObject);

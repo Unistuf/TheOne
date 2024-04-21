@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class RangedAI : MonoBehaviour
 {
     public GameObject player;
+    public Transform target;
     public GameObject projectilePrefab;
+
+    public SpriteRenderer spriteRenderer;
+    public Sprite chargingSprite;
+    public Sprite attackingSprite;
 
     bool isAttacking;
 
@@ -16,10 +22,12 @@ public class RangedAI : MonoBehaviour
     public float attackRangeMax;
     public float attackCooldown;
 
+    float angle;
 
     void Start()
     {
         player = GameObject.Find("Player");
+        target = player.transform;
     }
 
     void Update()
@@ -44,6 +52,12 @@ public class RangedAI : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, player.transform.position, -movementStep);
                 }
 
+                if (target != null)
+                {
+                    Vector2 aimDirection = player.transform.position - transform.position;
+                    angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                }
             }
         }
     }
@@ -55,11 +69,16 @@ public class RangedAI : MonoBehaviour
             // Lock coroutine until it finishes
             isAttacking = true;
 
+            // Set the sprite to the attacking sprite
+            spriteRenderer.sprite = attackingSprite;
+            yield return new WaitForSeconds(attackCooldown / 5f);
+
             // Create a projectile and set its target to the player
             GameObject currentProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, this.transform);
             currentProjectile.GetComponent<EnemyProjectileLogic>().target = player;
 
             // Then wait for the attack cooldown, then unlock the coroutine
+            spriteRenderer.sprite = chargingSprite;
             yield return new WaitForSeconds(attackCooldown);
             isAttacking = false;
         }

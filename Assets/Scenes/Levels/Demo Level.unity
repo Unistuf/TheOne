@@ -459,6 +459,34 @@ PrefabInstance:
       propertyPath: currentPlayerLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 277116334}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnUsePotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerHealth, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169493672467554975, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5262512775355067502, guid: 482e49798668c6541aaf5bc55c63101a, type: 3}
       propertyPath: m_Name
       value: Player

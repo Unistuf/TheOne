@@ -192,12 +192,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnUsePotion(InputAction.CallbackContext context)
     {
-        Debug.Log("guh");
         if (health < maxHealth)
         {
             hpPotion -= 1;
-            ApplyHealing(50);
+            Debug.Log(hpPotion);
+            ApplyHealing(25);
         }
-        
     }
 }

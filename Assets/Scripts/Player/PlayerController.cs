@@ -37,7 +37,10 @@ public class PlayerController : MonoBehaviour
         {"B", 1},
         {"C", 2},
         {"D", 3},
-        {"AA", 4}
+        {"AA", 4},
+        {"AAA", 8},
+        {"DDB", 9},
+        {"BBD", 10}
      };
     
 
@@ -125,6 +128,7 @@ public class PlayerController : MonoBehaviour
             if (inZone != "N")
             {
                 comboString += inZone;
+                Debug.Log(comboString);
                 bool foundOnFirstCheck = false;
 
                 // Then, check current the combo against the combo list, and perform any attack or combo that we "hit" at each stage
@@ -152,7 +156,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Cap our combo length to 2
-            if (comboString.Length >= 2)
+            if (comboString.Length >= 3)
             {
                 comboString = string.Empty;
             }
@@ -182,24 +186,51 @@ public class PlayerController : MonoBehaviour
             }
             if (attackID == 1)
             {
-                StartCoroutine(SwingAttack(true, 45));
+                StartCoroutine(SwingAttack(true, 22.5f, 45f));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
             if (attackID == 3)
             {
-                StartCoroutine(SwingAttack(false, 45));
+                StartCoroutine(SwingAttack(false, 22.5f, 45f));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
             if (attackID == 4)
             {
-                StartCoroutine(ThrustAttack());
+                StartCoroutine(SwingAttack(true, -22.5f, 45f));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.2f);
                 StartCoroutine(ThrustAttack());
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
+            }
+            if (attackID == 8)
+            {
+                StartCoroutine(SwingAttack(false, -22.5f, 45f));
+                attackEnabled = false;
+                yield return new WaitForSeconds(0.25f);
+                StartCoroutine(SwingAttack(true, -22.5f, 45f));
+                yield return new WaitForSeconds(0.25f);
+                StartCoroutine(SwingAttack(false, -22.5f, 45f));
+                yield return new WaitForSeconds(0.25f);
+                StartCoroutine(ThrustAttack());
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
+            }
+            if (attackID == 9)
+            {
+                StartCoroutine(SwingAttack(true, 45f, 360f));
+                attackEnabled = false;
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
+            }
+            if (attackID == 10)
+            {
+                StartCoroutine(SwingAttack(false, -45f, 360f));
+                attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
@@ -220,21 +251,22 @@ public class PlayerController : MonoBehaviour
     }
 
     // Swing attack logic
-    public IEnumerator SwingAttack(bool isRight, float startPos)
+    public IEnumerator SwingAttack(bool isRight, float startPos, float swingWidth)
     {
         GameObject currentSwingAttack = Instantiate(SwingHitbox, transform);
         currentSwingAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
         float multiplier = 2f;
+        float maxSwing = swingWidth;
 
         // If we are swinging to the right, invert the rotation direction by making multiplier negative
         if (isRight)
         {
             multiplier = -multiplier;
         }
-        for (float i = startPos; i <= i + 45; i++)
+        for (float i = startPos; i <= startPos + maxSwing; i++)
         {
             currentSwingAttack.transform.localRotation = Quaternion.Euler(0, 0, i * multiplier);
-            yield return new WaitForSeconds(0.75f * Time.deltaTime);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
 
         Destroy(currentSwingAttack.gameObject);

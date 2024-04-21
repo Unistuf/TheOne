@@ -38,6 +38,8 @@ public class EnemyProjectileLogic : MonoBehaviour
         // Find the direction to the target and set our velocity toward it
         aimDirection = target.transform.position - transform.position;
         rb.velocity = aimDirection * projectileSpeed;
+        float angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         // Unparent the projectile so it doesn't continuously inherit momentum
         transform.parent = null;

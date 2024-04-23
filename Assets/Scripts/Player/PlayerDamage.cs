@@ -25,8 +25,7 @@ public class PlayerDamage : MonoBehaviour
 
             Vector2 aimDirection = transform.parent.transform.position - collision.transform.position;
             float angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
-
-            collision.GetComponent<Rigidbody2D>().velocity = -aimDirection.normalized * 10;
+            collision.GetComponent<Rigidbody2D>().AddForce(-aimDirection.normalized * 100);
         }
     }
 }

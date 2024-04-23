@@ -8,6 +8,7 @@ public class MeleeAI : MonoBehaviour
 {
     public GameObject player;
     public Transform target;
+    public Rigidbody2D rb;
 
     [Header("Enemy Config")]
     public float aggroRange;
@@ -20,12 +21,15 @@ public class MeleeAI : MonoBehaviour
     {
         player = GameObject.Find("Player");
         target = player.transform;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
         {
+            Vector2 aimDirection = player.transform.position - transform.position;
+
             if (Vector3.Distance(transform.position, player.transform.position) < attackRange - 0.1f)
             {
                 DoAttack();
@@ -34,11 +38,12 @@ public class MeleeAI : MonoBehaviour
             {
                 float movementStep = movementSpeed / 100;
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementStep);
+                Debug.Log("guh");
+                //rb.AddForce(aimDirection * movementStep);
             }
 
             if (target != null)
             {
-                Vector2 aimDirection = player.transform.position - transform.position;
                 angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             }

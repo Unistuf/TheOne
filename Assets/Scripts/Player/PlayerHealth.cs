@@ -96,7 +96,6 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthSlider.fillAmount = health / maxHealth;
-        Debug.Log(health);
     }
 
     // Apply damage to the player with this function

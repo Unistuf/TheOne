@@ -130,8 +130,8 @@ MonoBehaviour:
   aggroRange: 10
   movementSpeed: 3
   maxSpeed: 3
-  attackRangeMin: 2
-  attackRangeMax: 2
+  attackRangeMin: 1
+  attackRangeMax: 3
   attackCooldown: 3
 --- !u!114 &-6773905759175576952
 MonoBehaviour:

@@ -43,6 +43,7 @@ public class RangedAI : MonoBehaviour
             if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMax && Vector3.Distance(transform.position, player.transform.position) > attackRangeMin)
             {
                 StartCoroutine(DoAttack());
+                Debug.Log("buh");
             }
             else
             {

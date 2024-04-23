@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public GameObject SwingHitbox;
     public GameObject ParryHitbox;
 
+    public GameObject pauseMenuPanel;
+
     // The list of valid attacks and combos that we should check against
     // To add more moves, increase the first value of comboList and add the new move's name and corresponding combo in the format below
     Dictionary<string, int> comboList = new Dictionary<string, int>()
@@ -273,4 +275,13 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    public void OnTogglePause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            bool isPanelActive = pauseMenuPanel.activeSelf;
+
+            pauseMenuPanel.SetActive(!isPanelActive);
+        }
+    }
 }

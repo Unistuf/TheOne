@@ -13,6 +13,7 @@ public class MeleeAI : MonoBehaviour
     [Header("Enemy Config")]
     public float aggroRange;
     public float movementSpeed;
+    public float maxSpeed;
     public float attackRange;
 
     float angle;
@@ -29,6 +30,7 @@ public class MeleeAI : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
         {
             Vector2 aimDirection = player.transform.position - transform.position;
+            angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
 
             if (Vector3.Distance(transform.position, player.transform.position) < attackRange - 0.1f)
             {
@@ -37,15 +39,29 @@ public class MeleeAI : MonoBehaviour
             else
             {
                 float movementStep = movementSpeed / 100;
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementStep);
-                Debug.Log("guh");
-                //rb.AddForce(aimDirection * movementStep);
+                rb.AddForce(aimDirection * movementStep * 10);
             }
 
             if (target != null)
             {
-                angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            }
+
+            if (rb.velocity.x >= maxSpeed)
+            {
+                rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+            }
+            if (rb.velocity.y >= maxSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, maxSpeed);
+            }
+            if (rb.velocity.x <= -maxSpeed)
+            {
+                rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+            }
+            if (rb.velocity.y <= -maxSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);
             }
         }
 

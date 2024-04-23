@@ -64,8 +64,6 @@ public class MeleeAI : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);
             }
         }
-
-        
     }
 
     void DoAttack()

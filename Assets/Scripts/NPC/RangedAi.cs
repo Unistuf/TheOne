@@ -7,6 +7,7 @@ public class RangedAI : MonoBehaviour
 {
     public GameObject player;
     public Transform target;
+    public Rigidbody2D rb;
     public GameObject projectilePrefab;
 
     public SpriteRenderer spriteRenderer;
@@ -18,6 +19,7 @@ public class RangedAI : MonoBehaviour
     [Header("Enemy Config")]
     public float aggroRange;
     public float movementSpeed;
+    public float maxSpeed;
     public float attackRangeMin;
     public float attackRangeMax;
     public float attackCooldown;
@@ -28,12 +30,16 @@ public class RangedAI : MonoBehaviour
     {
         player = GameObject.Find("Player");
         target = player.transform;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
         {
+            Vector2 aimDirection = player.transform.position - transform.position;
+            angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+
             if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMax && Vector3.Distance(transform.position, player.transform.position) > attackRangeMin)
             {
                 StartCoroutine(DoAttack());
@@ -43,19 +49,17 @@ public class RangedAI : MonoBehaviour
                 if (Vector3.Distance(transform.position, player.transform.position) > attackRangeMax)
                 {
                     float movementStep = movementSpeed / 100;
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementStep);
+                    rb.AddForce(aimDirection * movementStep * 10);
                 }
 
                 else if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMin)
                 {
                     float movementStep = movementSpeed / 135;
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, -movementStep);
+                    rb.AddForce(aimDirection * movementStep * -10);
                 }
 
                 if (target != null)
                 {
-                    Vector2 aimDirection = player.transform.position - transform.position;
-                    angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 }
             }

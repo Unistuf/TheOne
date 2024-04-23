@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.UIElements;
+// using UnityEngine.UIElements;
 
 public class XpLevelSystem : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class XpLevelSystem : MonoBehaviour
     public float currentPlayerXp;
 
     [Header("UI Elements")]
-    public UnityEngine.UI.Slider ProgressBar;
+    public Image ProgressBar;
     public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI nextLevelText;
     public TextMeshProUGUI xpAmountText;
@@ -35,12 +35,14 @@ public class XpLevelSystem : MonoBehaviour
         }
 
         UpdateUi();
+
+        ProgressBar.fillAmount = currentPlayerXp /xpRequired;
     }
 
     void UpdateUi()
     {
-        ProgressBar.maxValue = xpRequired;
-        ProgressBar.value = currentPlayerXp;
+        //ProgressBar.maxValue = xpRequired;
+        //ProgressBar.value = currentPlayerXp;
 
         currentLevelText.text = "" + currentPlayerLevel;
         nextLevelText.text = "" + (currentPlayerLevel + 1);

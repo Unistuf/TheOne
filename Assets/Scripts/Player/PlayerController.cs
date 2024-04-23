@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
         {"DDB", 9},
         {"BBD", 10}
      };
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -277,7 +278,7 @@ public class PlayerController : MonoBehaviour
         {
             multiplier = -multiplier;
         }
-        for (float i = startPos; i <= startPos + maxSwing; i+=2)
+        for (float i = startPos; i <= startPos + maxSwing; i += 2)
         {
             currentSwingAttack.transform.localRotation = Quaternion.Euler(0, 0, i * multiplier);
             yield return new WaitForSeconds(0.005f);
@@ -296,7 +297,7 @@ public class PlayerController : MonoBehaviour
             pauseMenuPanel.SetActive(!isPanelActive);
         }
 
-        if(isPanelActive)
+        if (isPanelActive)
         {
             Time.timeScale = 0;
         }
@@ -305,4 +306,15 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 1;
         }
     }
+
+    public void SetTimeScale(float newTimeScale)
+    {
+        Time.timeScale = newTimeScale;
+    }
+
+    /*    
+    public void SelectNextButton(GameObject gameobject)
+    {
+        EventSystem.current.SetSelectedGameObject(gameobject);
+    }*/
 }

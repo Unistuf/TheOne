@@ -114,7 +114,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -277,13 +277,15 @@ MonoBehaviour:
   animator: {fileID: 743308461865119903}
   playerHealth: {fileID: 218402668271041780}
   rb: {fileID: 6371923166867685369}
+  rStickPos: {x: 0, y: 0}
   zoneWidth: 0.3
   zoneHeight: 0.8
   comboString: 
-  attackCooldown: 0.5
+  inputActionAsset: {fileID: 0}
   ThrustHitbox: {fileID: 4751093388067465767, guid: 977c5802a7acbac48b68b696417aaf8d, type: 3}
   SwingHitbox: {fileID: 4379702804263771213, guid: 36e1cb6462e85fd489b55840ec477c6c, type: 3}
   ParryHitbox: {fileID: 0}
+  pauseMenuPanel: {fileID: 0}
 --- !u!114 &218402668271041780
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -287,21 +287,16 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-
-    public void OnPauseInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            TogglePause();
-        }
-    }
-
-    public void TogglePause()
+    public void OnTogglePause(InputAction.CallbackContext context)
     {
         bool isPanelActive = pauseMenuPanel.activeSelf;
-        pauseMenuPanel.SetActive(!isPanelActive);
 
-        if (!isPanelActive)
+        if (context.performed)
+        {
+            pauseMenuPanel.SetActive(!isPanelActive);
+        }
+
+        if(isPanelActive)
         {
             Time.timeScale = 0;
         }

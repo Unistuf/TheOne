@@ -147,9 +147,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 3
   hpBottleDrop: {fileID: 7457218479614347411, guid: e102192b08e16094ea4261926236d959, type: 3}
-  hpBottleDropChance: 5
+  hpBottleDropChance: 3
   player: {fileID: 0}
-  xpGain: 8
+  xpGain: 3
 --- !u!1 &8053716598384743888
 GameObject:
   m_ObjectHideFlags: 0

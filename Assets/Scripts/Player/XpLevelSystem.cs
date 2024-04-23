@@ -18,7 +18,7 @@ public class XpLevelSystem : MonoBehaviour
 
     [Header("Config")]
     public float xpStartOffset = 9; // c
-    public float xpCostScalingMultiplyer = 1.5f; // b
+    public float xpCostScalingMultiplyer = 2.25f; // b
 
     [Header("Runtime")]
     public float xpRequired; // y

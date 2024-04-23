@@ -57,13 +57,13 @@ public class RangedAI : MonoBehaviour
                     float movementStep = movementSpeed / 135;
                     rb.AddForce(aimDirection * movementStep * -10);
                 }
+            }
+        }
 
-                if (target != null)
+        if (target != null)
                 {
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 }
-            }
-        }
     }
 
     IEnumerator DoAttack()

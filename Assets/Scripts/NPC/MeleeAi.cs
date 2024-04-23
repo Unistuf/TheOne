@@ -15,8 +15,10 @@ public class MeleeAI : MonoBehaviour
     public float movementSpeed;
     public float maxSpeed;
     public float attackRange;
+    public GameObject meleeAttack;
 
     float angle;
+    bool isAttacking = false;
 
     void Start()
     {
@@ -34,7 +36,7 @@ public class MeleeAI : MonoBehaviour
 
             if (Vector3.Distance(transform.position, player.transform.position) < attackRange - 0.1f)
             {
-                DoAttack();
+                StartCoroutine(DoAttack());
             }
             else
             {
@@ -66,9 +68,14 @@ public class MeleeAI : MonoBehaviour
         }
     }
 
-    void DoAttack()
+    IEnumerator DoAttack()
     {
-        //Attack code goes in here
-        Debug.Log("MeleeAttack");
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            GameObject currentAttack = Instantiate(meleeAttack, gameObject.transform, false);
+            yield return new WaitForSeconds(1f);
+            isAttacking = false;
+        }
     }
 }

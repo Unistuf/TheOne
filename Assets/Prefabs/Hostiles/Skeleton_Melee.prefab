@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8284097154329081064}
   - component: {fileID: 3334833347589944921}
   m_Layer: 0
-  m_Name: Skeleton_Melle
+  m_Name: Skeleton_Melee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   movementSpeed: 1.8
   maxSpeed: 2
   attackRange: 1
+  meleeAttack: {fileID: 8575753250993274916, guid: eb88f1ca276a1064196ce0758d36e59e, type: 3}
 --- !u!61 &-1439125470918512453
 BoxCollider2D:
   m_ObjectHideFlags: 0

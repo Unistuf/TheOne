@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
 
     Vector2 movement;
-    Vector2 rStickPos;
+    [SerializeField] Vector2 rStickPos;
 
     [SerializeField] float zoneWidth = 0.3f;
     [SerializeField] float zoneHeight = 0.8f;
@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     bool insideZone;
 
     [SerializeField] string comboString = string.Empty;
-    [SerializeField] float attackCooldown = 0.5f;
     bool attackEnabled = true;
+    [SerializeField] InputActionAsset inputActionAsset;
 
     public GameObject ThrustHitbox;
     public GameObject SwingHitbox;
@@ -82,13 +82,13 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = playerAim;
         }
-        
     }
 
     public void OnSwordSwing(InputAction.CallbackContext value)
     {
         if (attackEnabled)
         {
+            Debug.Log("Attack");
             // Collect the input value of our right stick
             rStickPos = value.ReadValue<Vector2>();
 
@@ -130,8 +130,8 @@ public class PlayerController : MonoBehaviour
             if (inZone != "N")
             {
                 comboString += inZone;
-                Debug.Log(comboString);
                 bool foundOnFirstCheck = false;
+
 
                 // Then, check current the combo against the combo list, and perform any attack or combo that we "hit" at each stage
                 // E.g. if we perform a combo AAC, this means we will perform 3 attacks, A, AA, and AAC
@@ -155,9 +155,11 @@ public class PlayerController : MonoBehaviour
                         StartCoroutine(CheckSwordAttack(attackID));
                     }
                 }
+
+                rStickPos = Vector2.zero;
             }
 
-            // Cap our combo length to 2
+            // Cap our combo length to 3
             if (comboString.Length >= 3)
             {
                 comboString = string.Empty;
@@ -178,6 +180,16 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerHealth.isImmortal) // Player cannot attack while immortal
         {
+            switch (attackID)
+            {
+                case 0:
+
+                    break;
+                case 1:
+
+                    break;
+            }
+
             // Attack IDs
             if (attackID == 0)
             {
@@ -186,21 +198,21 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(0.15f);
                 attackEnabled = true;
             }
-            if (attackID == 1)
+            else if (attackID == 1)
             {
                 StartCoroutine(SwingAttack(true, 22.5f, 45f));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
-            if (attackID == 3)
+            else if (attackID == 3)
             {
                 StartCoroutine(SwingAttack(false, 22.5f, 45f));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
-            if (attackID == 4)
+            else if (attackID == 4)
             {
                 StartCoroutine(SwingAttack(true, -22.5f, 45f));
                 attackEnabled = false;
@@ -209,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
-            if (attackID == 8)
+            else if (attackID == 8)
             {
                 StartCoroutine(SwingAttack(false, -22.5f, 45f));
                 attackEnabled = false;
@@ -222,14 +234,14 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
-            if (attackID == 9)
+            else if (attackID == 9)
             {
                 StartCoroutine(SwingAttack(true, 45f, 360f));
                 attackEnabled = false;
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
-            if (attackID == 10)
+            else if (attackID == 10)
             {
                 StartCoroutine(SwingAttack(false, -45f, 360f));
                 attackEnabled = false;
@@ -265,10 +277,10 @@ public class PlayerController : MonoBehaviour
         {
             multiplier = -multiplier;
         }
-        for (float i = startPos; i <= startPos + maxSwing; i++)
+        for (float i = startPos; i <= startPos + maxSwing; i+=2)
         {
             currentSwingAttack.transform.localRotation = Quaternion.Euler(0, 0, i * multiplier);
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSeconds(0.005f);
         }
 
         Destroy(currentSwingAttack.gameObject);

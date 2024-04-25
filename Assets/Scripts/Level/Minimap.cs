@@ -27,10 +27,10 @@ public class Minimap : MonoBehaviour
 
     void Update()
     {
-            float x = transform.position.x + ((player.transform.position.x / 10) * iconDistance);
-            float y = transform.position.y + ((player.transform.position.y / 10) * iconDistance);
+            float x = transform.position.x + ((player.transform.position.x / 10) * iconDistance); //Set the X of the player icon
+            float y = transform.position.y + ((player.transform.position.y / 10) * iconDistance); //Set the Y of the player icon
 
-            playerIcon.position = new Vector3(x, y, -1.5f);
+            playerIcon.position = new Vector3(x, y, -1.5f); //Set the player icon position
 
             minimapTexture.Release();
     }
@@ -40,18 +40,18 @@ public class Minimap : MonoBehaviour
         savedGridLength = gridLength;
         savedGridWidth = gridWidth;
 
-        for (int i = 0; i < spawnedIcons.Count; i++)
+        for (int i = 0; i < spawnedIcons.Count; i++) //Delete any previous map icons
         {
             Destroy(spawnedIcons[i]);
         }
 
-        for (int x = 0; x < gridWidth; x++)
+        for (int x = 0; x < gridWidth; x++) //Loop through the grid X
         {
-            for (int y = 0; y < gridLength; y++)
+            for (int y = 0; y < gridLength; y++) //Loop through the grid Y
             {
                 switch(dungeonLayout[x,y])
                 {
-                    default:
+                    default: //Spawn regular squares for the regular rooms
                         temp = Instantiate(regularIcon, new Vector3(transform.position.x + x * iconDistance, transform.position.y + y * iconDistance, 0), transform.rotation);
                         spawnedIcons.Add(temp);
                         temp.transform.SetParent(transform); 
@@ -59,19 +59,19 @@ public class Minimap : MonoBehaviour
 
                     case 0: break;
 
-                    case -1: 
+                    case -1: //Spawn the entry room icon
                         temp = Instantiate(entryIcon, new Vector3(transform.position.x + x * iconDistance, transform.position.y + y * iconDistance, 0), transform.rotation);
                         spawnedIcons.Add(temp);
                         temp.transform.SetParent(transform); 
                     break;
 
-                    case -2: 
+                    case -2: // Spawn the End room icon
                         temp = Instantiate(exitIcon, new Vector3(transform.position.x + x * iconDistance, transform.position.y + y * iconDistance, 0), transform.rotation);
                         spawnedIcons.Add(temp);
                         temp.transform.SetParent(transform);               
                     break;
 
-                    case -3: 
+                    case -3: //Spawn the safe zone icon
                         temp = Instantiate(safeZoneIcon, new Vector3(transform.position.x + x * iconDistance, transform.position.y + y * iconDistance, 0), transform.rotation);
                         spawnedIcons.Add(temp);
                         temp.transform.SetParent(transform);               
@@ -81,10 +81,10 @@ public class Minimap : MonoBehaviour
         }
 
 
-        Vector3 newCamPosition = new Vector3(transform.position.x + ((gridWidth * iconDistance) / 2), transform.position.y + ((gridLength * iconDistance) / 2), -5);
+        Vector3 newCamPosition = new Vector3(transform.position.x + ((gridWidth * iconDistance) / 2), transform.position.y + ((gridLength * iconDistance) / 2), -5); //Center the minimap render camera
 
-        miniMapCamera.transform.position = newCamPosition;
-        miniMapCamera.GetComponent<Camera>().orthographicSize = (gridLength * 1.2f) + (gridWidth * 0.1f);
+        miniMapCamera.transform.position = newCamPosition; //Set the minimap render cam position
+        miniMapCamera.GetComponent<Camera>().orthographicSize = (gridLength * 1.2f) + (gridWidth * 0.1f); //Set the ortho range based on size of level
         minimapTexture.Release();
     }
 }

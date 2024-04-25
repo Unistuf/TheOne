@@ -9,7 +9,7 @@ public class RoomProgress : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player") //Save the player progression then move to the next room
         {
             other.gameObject.GetComponent<PlayerHealth>().SaveGame();
             SceneManager.LoadScene(nextSceneNumber);

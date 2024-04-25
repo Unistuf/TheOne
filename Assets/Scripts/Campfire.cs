@@ -14,28 +14,28 @@ public class Campfire : MonoBehaviour
 
     void Update()
     {
-        if (!isUsed)
+        if (!isUsed) //Set the sprites if the campire is not used
         {
             offSprite.SetActive(!campfireStatus);
             onSprite.SetActive(campfireStatus);
             usedSprite.SetActive(false);
         }
-        else{
+        else{ //Set the sprites if the campire is used
             offSprite.SetActive(false);
             onSprite.SetActive(false);  
             usedSprite.SetActive(true);          
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter2D(Collision2D col)//Detect the player colliding with the campfire 
     {
         if (isUsed == false && col.gameObject.tag == "Player")
         {
-            StartCoroutine(StartCampFire());
+            StartCoroutine(StartCampFire()); //Turn the campfire on
         }
     }
 
-    IEnumerator StartCampFire()
+    IEnumerator StartCampFire() //Campfire duration loop
     {
         campfireStatus = true;
         yield return new WaitForSeconds(campfireDuration);

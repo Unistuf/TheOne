@@ -35,7 +35,7 @@ public class RangedAI : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
+        if (Vector3.Distance(transform.position, player.transform.position) < aggroRange) //Check if the player is in Aggro range
         {
             Vector2 aimDirection = player.transform.position - transform.position;
             angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
@@ -47,15 +47,15 @@ public class RangedAI : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, player.transform.position) > attackRangeMax)
+                if (Vector3.Distance(transform.position, player.transform.position) > attackRangeMax) //Moves the ranged enemy closer if they arent close enough to attack
                 {
                     float movementStep = movementSpeed / 100;
                     rb.AddForce(aimDirection * movementStep * 10);
                 }
 
-                else if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMin)
+                else if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMin) // Moves the ranged enemy away if they are too close to attack
                 {
-                    float movementStep = movementSpeed / 135;
+                    float movementStep = movementSpeed / 160;
                     rb.AddForce(aimDirection * movementStep * -10);
                 }
             }

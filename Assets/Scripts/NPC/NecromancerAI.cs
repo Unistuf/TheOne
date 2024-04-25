@@ -103,16 +103,16 @@ public class NecromancerAI : MonoBehaviour
         {
             yield return new WaitForSeconds(summonCoolDown);
             
-            for (int i = 0; i < Random.Range(spawnMinMax.x, spawnMinMax.y); i++)
+            for (int i = 0; i < Random.Range(spawnMinMax.x, spawnMinMax.y); i++) //Spawns a random amount of enemies
             {
                 int rnd = Random.Range(0, 1);
                 int rndSpawn = Random.Range(0, spawnPositions.Length);
 
                 if (rnd == 0)
                 {
-                    Instantiate(meleeAi, spawnPositions[rndSpawn].position, transform.rotation);
+                    Instantiate(meleeAi, spawnPositions[rndSpawn].position, transform.rotation); //Spawn melee AI
                 }else{
-                    Instantiate(rangedAi, spawnPositions[rndSpawn].position, transform.rotation);
+                    Instantiate(rangedAi, spawnPositions[rndSpawn].position, transform.rotation); //Spawn Ranged AI
                 }
             }
         }   
@@ -123,7 +123,7 @@ public class NecromancerAI : MonoBehaviour
         StartCoroutine(DeadSummonCD());
     }
 
-    public void DoDamage(float damage)
+    public void DoDamage(float damage) //The damage system for the necromancer
     {
         health -= damage;
 
@@ -135,7 +135,7 @@ public class NecromancerAI : MonoBehaviour
 
     void DoDeath()
     {
-        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain);
+        player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain); //Reward the player with xp when the necromancer dies
         Destroy(this.gameObject);
     }
 }

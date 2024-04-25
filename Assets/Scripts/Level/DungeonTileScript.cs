@@ -16,7 +16,7 @@ public class DungeonTileScript : MonoBehaviour
     public bool isTileLeft = false;
     public bool isTileRight = false;
 
-    public void UpdateDoors()
+    public void UpdateDoors() //Update doorways based on their position in the level, i.e if another room is on the left, the left door will be open
     {
         northEntry.SetActive(!isTileAbove);
         eastEntry.SetActive(!isTileRight);

@@ -27,6 +27,7 @@ public class XpLevelSystem : MonoBehaviour
 
     void Update()
     {
+        //Xp cost function and scaling
         xpRequired = (currentPlayerLevel * xpCostScalingMultiplyer) * currentPlayerLevel + xpStartOffset; //y = (x * b) * x + c
 
         if (currentPlayerXp >= xpRequired)
@@ -36,14 +37,14 @@ public class XpLevelSystem : MonoBehaviour
 
         UpdateUi();
 
-        ProgressBar.fillAmount = currentPlayerXp /xpRequired;
+        
     }
 
     void UpdateUi()
     {
-        //ProgressBar.maxValue = xpRequired;
-        //ProgressBar.value = currentPlayerXp;
+        ProgressBar.fillAmount = currentPlayerXp / xpRequired; //Update bar image
 
+        //Update text elements
         currentLevelText.text = "" + currentPlayerLevel;
         nextLevelText.text = "" + (currentPlayerLevel + 1);
         xpAmountText.text = "Level " + currentPlayerLevel + ": " + Mathf.FloorToInt(currentPlayerXp) + "/" + xpRequired + " xp";
@@ -51,10 +52,11 @@ public class XpLevelSystem : MonoBehaviour
 
     void LevelUp()
     {
+        //Increase level
         currentPlayerXp -= xpRequired;
         currentPlayerLevel += 1;
 
-        
+        //Level up rewards
         playerHealth.IncreaseMaxHealth(10);
         playerHealth.ApplyHealing(10);
         playerHealth.hpPotion += 2;

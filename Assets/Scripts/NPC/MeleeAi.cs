@@ -29,12 +29,12 @@ public class MeleeAI : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < aggroRange)
+        if (Vector3.Distance(transform.position, player.transform.position) < aggroRange) //Check if the player is in Aggro range
         {
             Vector2 aimDirection = player.transform.position - transform.position;
             angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
 
-            if (Vector3.Distance(transform.position, player.transform.position) < attackRange - 0.1f)
+            if (Vector3.Distance(transform.position, player.transform.position) < attackRange - 0.1f) //If the player is in attack range, then attack the player
             {
                 StartCoroutine(DoAttack());
             }
@@ -46,24 +46,25 @@ public class MeleeAI : MonoBehaviour
 
             if (target != null)
             {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); 
             }
 
             if (rb.velocity.x >= maxSpeed)
             {
-                rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(maxSpeed, rb.velocity.y);//Cap move speed
             }
+            else if (rb.velocity.x <= -maxSpeed)
+            {
+                rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);//Cap move speed
+            }
+
             if (rb.velocity.y >= maxSpeed)
             {
-                rb.velocity = new Vector2(rb.velocity.x, maxSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, maxSpeed);//Cap move speed
             }
-            if (rb.velocity.x <= -maxSpeed)
+            else if (rb.velocity.y <= -maxSpeed)
             {
-                rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
-            }
-            if (rb.velocity.y <= -maxSpeed)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);//Cap move speed
             }
         }
     }
@@ -73,7 +74,7 @@ public class MeleeAI : MonoBehaviour
         if (!isAttacking)
         {
             isAttacking = true;
-            GameObject currentAttack = Instantiate(meleeAttack, gameObject.transform, false);
+            GameObject currentAttack = Instantiate(meleeAttack, gameObject.transform, false); //Spawn attack
             yield return new WaitForSeconds(1f);
             isAttacking = false;
         }

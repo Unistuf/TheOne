@@ -60,7 +60,7 @@ public class DungeonManager : MonoBehaviour
         minimap.UpdateMap(dungeonLayout, gridLength, gridWidth);
     }
 
-    void ClearDungeon()//Delete All previously placed tiles and data if they exist
+    void ClearDungeon() //Delete All previously placed tiles and data if they exist
     {
         for (int i = 0; i < spawnedTiles.Count; i++) 
         {

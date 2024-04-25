@@ -24,6 +24,7 @@ public class EnemyProjectileLogic : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject parentEnemy;
     public GameObject target;
+    float angle;
 
     Vector2 aimDirection;
     bool alreadyHoming;
@@ -55,6 +56,14 @@ public class EnemyProjectileLogic : MonoBehaviour
         if (isHoming)
         {
             StartCoroutine(ProjectileHoming());
+
+            Vector2 aimDirection = target.transform.position - transform.position;
+            angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+
+            if (target != null)
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            }
         }
 
         StartCoroutine(DestroyOverTime());

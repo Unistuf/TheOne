@@ -71,8 +71,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ExitToMainMenu()
-    {
-        SceneManager.LoadScene(2);
+    {  
+        SceneManager.LoadScene(1);
     }
 
     // Use our Move action from the new input system to get our input

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     Vector2 movement;
     [SerializeField] Vector2 rStickPos;
 
+    [SerializeField] int maxComboLength;
     [SerializeField] float zoneWidth = 0.3f;
     [SerializeField] float zoneHeight = 0.8f;
     string currentZone;
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public GameObject ParryHitbox;
 
     public GameObject pauseMenuPanel;
+    public GameObject comboDisplay;
+    public Image comboArrowImage;
 
     // The list of valid attacks and combos that we should check against
     // To add more moves, increase the first value of comboList and add the new move's name and corresponding combo in the format below
@@ -54,6 +58,8 @@ public class PlayerController : MonoBehaviour
         // grabs rigidbody component on player
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        comboDisplay = GameObject.Find("ComboDisplay");
     }
 
     // Update is called once per frame
@@ -132,12 +138,41 @@ public class PlayerController : MonoBehaviour
             insideZone = true;
             currentZone = inZone;
 
-            // And append the zone's ID to the combo string, unless we are in the null zone in the centre
             if (inZone != "N")
             {
+                // Do not clear our combo display until we start another combo
+                if (inZone != string.Empty && comboString == string.Empty)
+                {
+                    foreach (Transform arrowImage in comboDisplay.transform)
+                    {
+                        Destroy(arrowImage.gameObject);
+                    }
+                }
+
+                // And append the zone's ID to the combo string, unless we are in the null zone in the centre
                 comboString += inZone;
                 bool foundOnFirstCheck = false;
 
+
+                // Add the current input to the combo display
+                Image currentArrow = Instantiate(comboArrowImage, comboDisplay.transform);
+
+                // And rotate the image of the arrow to match the input direction
+                switch (inZone)
+                {
+                    case "A":
+                        currentArrow.transform.rotation = Quaternion.identity;
+                        break;                    
+                    case "B":
+                        currentArrow.transform.rotation = Quaternion.Euler(0, 0, 270);
+                        break;                    
+                    case "C":
+                        currentArrow.transform.rotation = Quaternion.Euler(0, 0, 180);
+                        break;                   
+                    case "D":
+                        currentArrow.transform.rotation = Quaternion.Euler(0, 0, 90);
+                        break;
+                }
 
                 // Then, check current the combo against the combo list, and perform any attack or combo that we "hit" at each stage
                 // E.g. if we perform a combo AAC, this means we will perform 3 attacks, A, AA, and AAC
@@ -166,7 +201,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Cap our combo length to 3
-            if (comboString.Length >= 3)
+            if (comboString.Length >= maxComboLength)
             {
                 comboString = string.Empty;
             }
@@ -177,6 +212,8 @@ public class PlayerController : MonoBehaviour
         {
             insideZone = false;
         }
+
+        inZone = string.Empty;
 
         yield return null;
     }

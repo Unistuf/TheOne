@@ -1831,46 +1831,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 968142651143307760, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4e4a0bdd4479df84d94a9083776e9490, type: 3}
-    - target: {fileID: 968142651143307760, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 968142651143307760, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 968142651143307760, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 968142651143307760, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466212848279246227, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: projectileLife
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466212848279246227, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: summoningSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 44fe0024e4e851d4581d10502b79e33d, type: 3}
-    - target: {fileID: 1466212848279246227, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: spinAttackSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 91cc5c46cc60c8d46bcc45f2ca30ab8d, type: 3}
-    - target: {fileID: 1466212848279246227, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: summonWindupTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1466212848279246227, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
-      propertyPath: regularFireSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4e4a0bdd4479df84d94a9083776e9490, type: 3}
     - target: {fileID: 4566683080795280565, guid: 6df1cd54434579e43a7da97b1008dae8, type: 3}
       propertyPath: m_Name
       value: Necromancer Boss

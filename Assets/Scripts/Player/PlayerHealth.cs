@@ -195,7 +195,6 @@ public class PlayerHealth : MonoBehaviour
         if (health < maxHealth)
         {
             hpPotion -= 1;
-            Debug.Log(hpPotion);
             ApplyHealing(25);
         }
     }

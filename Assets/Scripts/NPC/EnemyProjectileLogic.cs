@@ -24,7 +24,9 @@ public class EnemyProjectileLogic : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject parentEnemy;
     public GameObject target;
+    public bool hasBeenParried;
     float angle;
+    
 
     Vector2 aimDirection;
     bool alreadyHoming;
@@ -101,14 +103,37 @@ public class EnemyProjectileLogic : MonoBehaviour
         // If we hit our target, damage it
         if (otherCollider.gameObject == target)
         {
-            target.GetComponent<PlayerHealth>().ApplyDamage(damage);
+            if (target != parentEnemy)
+            {
+                target.GetComponent<PlayerHealth>().ApplyDamage(damage);
+                Destroy(gameObject);
+            }
+            else if (target == parentEnemy)
+            {
+                target.GetComponent<EnemyHealth>().DoDamage(damage);
+                Destroy(gameObject);
+            }
+            
         }
-        
-        // And destroy ourselves if we should upon touching any collider that isn't our parent Enemy     //Do nothing if the collision is with another bullet
-        if (otherCollider.gameObject != parentEnemy && destroySelfOnHit && otherCollider.gameObject.tag != "bullet")
+
+        // Or if we hit a parry hitbox, get parried
+        if (otherCollider.gameObject.tag == "Parry")
+        {
+            hasBeenParried = true;
+            target = parentEnemy;
+
+            // And now aim ourselves toward the enemy which fired us
+            aimDirection = target.transform.position - transform.position;
+            rb.velocity = aimDirection * projectileSpeed;
+            float angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+        // And then if not, destroy ourselves (if we should) upon touching any collider that isn't our parent Enemy or another bullet
+        else if (otherCollider.gameObject != parentEnemy && destroySelfOnHit && otherCollider.gameObject.tag != "bullet")
         {
             Destroy(gameObject);
         }
+
     }
 
     IEnumerator DestroyOverTime()

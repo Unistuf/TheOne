@@ -10,6 +10,7 @@ TagManager:
   - HpPotion
   - Armour
   - CampfireRadius
+  - Parry
   layers:
   - Default
   - TransparentFX

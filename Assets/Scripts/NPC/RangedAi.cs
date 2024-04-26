@@ -43,7 +43,6 @@ public class RangedAI : MonoBehaviour
             if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMax && Vector3.Distance(transform.position, player.transform.position) > attackRangeMin)
             {
                 StartCoroutine(DoAttack());
-                Debug.Log("buh");
             }
             else
             {
@@ -55,7 +54,7 @@ public class RangedAI : MonoBehaviour
 
                 else if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMin) // Moves the ranged enemy away if they are too close to attack
                 {
-                    float movementStep = movementSpeed / 160;
+                    float movementStep = movementSpeed / 100;
                     rb.AddForce(aimDirection * movementStep * -10);
                 }
             }

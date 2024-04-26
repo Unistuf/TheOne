@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour
     {
         if (attackEnabled)
         {
-            Debug.Log("Attack");
             // Collect the input value of our right stick
             rStickPos = value.ReadValue<Vector2>();
 
@@ -212,6 +211,13 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(0.25f);
                 attackEnabled = true;
             }
+            else if (attackID == 2)
+            {
+                StartCoroutine(ParryAttack());
+                attackEnabled = false;
+                yield return new WaitForSeconds(0.25f);
+                attackEnabled = true;
+            }
             else if (attackID == 3)
             {
                 StartCoroutine(SwingAttack(false, 22.5f, 45f));
@@ -291,6 +297,16 @@ public class PlayerController : MonoBehaviour
         }
 
         Destroy(currentSwingAttack.gameObject);
+        yield return null;
+    }
+    
+    public IEnumerator ParryAttack()
+    {
+        Debug.Log("Parryattack");
+        GameObject currentParryAttack = Instantiate(ParryHitbox, transform);
+        currentParryAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
+
+        Destroy(currentParryAttack, 0.3f);
         yield return null;
     }
 

@@ -324,7 +324,7 @@ MonoBehaviour:
   inputActionAsset: {fileID: 0}
   ThrustHitbox: {fileID: 4751093388067465767, guid: 977c5802a7acbac48b68b696417aaf8d, type: 3}
   SwingHitbox: {fileID: 4379702804263771213, guid: 36e1cb6462e85fd489b55840ec477c6c, type: 3}
-  ParryHitbox: {fileID: 0}
+  ParryHitbox: {fileID: 4751093388067465767, guid: af3661ecf461bd6409db1e47ceb939a5, type: 3}
   pauseMenuPanel: {fileID: 0}
 --- !u!114 &218402668271041780
 MonoBehaviour:

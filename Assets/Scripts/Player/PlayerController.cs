@@ -302,7 +302,6 @@ public class PlayerController : MonoBehaviour
     
     public IEnumerator ParryAttack()
     {
-        Debug.Log("Parryattack");
         GameObject currentParryAttack = Instantiate(ParryHitbox, transform);
         currentParryAttack.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
 

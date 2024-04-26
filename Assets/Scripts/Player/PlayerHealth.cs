@@ -192,10 +192,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnUsePotion(InputAction.CallbackContext context)
     {
-        if (health < maxHealth)
+        if (context.performed)
         {
-            hpPotion -= 1;
-            ApplyHealing(25);
+            if (health < maxHealth)
+            {
+                hpPotion -= 1;
+                ApplyHealing(25);
+            }
         }
     }
 }

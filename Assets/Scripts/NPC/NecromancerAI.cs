@@ -31,6 +31,7 @@ public class NecromancerAI : MonoBehaviour
     public Sprite regularFireSprite;
     public Sprite spinAttackSprite;
     public Sprite summoningSprite;
+    public GameObject bossGate;
 
     [Header("Runtime")]
     public bool isAggro;
@@ -183,6 +184,7 @@ public class NecromancerAI : MonoBehaviour
     void DoDeath()
     {
         player.GetComponent<XpLevelSystem>().AddPlayerXp(xpGain); //Reward the player with xp when the necromancer dies
+        bossGate.SetActive(true); // Open the gate to the next level
         Destroy(this.gameObject);
     }
 }

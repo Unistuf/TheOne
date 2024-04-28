@@ -16,5 +16,9 @@ public class PlayerDamage : MonoBehaviour
             float angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
             collision.GetComponent<Rigidbody2D>().AddForce(-aimDirection.normalized * 100);
         }
+        else if (collision.tag == "Necromancer")
+        {
+            collision.GetComponent<NecromancerAI>().DoDamage(attackDamage);
+        }
     }
 }

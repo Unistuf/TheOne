@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header(("SaveData"))]
     public XpLevelSystem xpSystem;
+    public int levelsCleared;
 
     [Header(("UI"))]
     public Image healthBarImage;
@@ -56,6 +57,8 @@ public class PlayerHealth : MonoBehaviour
 
         xpSystem.currentPlayerXp = PlayerPrefs.GetFloat("currentXp", 0);
         xpSystem.currentPlayerLevel = PlayerPrefs.GetInt("currentLevel", 0);
+
+        levelsCleared = PlayerPrefs.GetInt("levelsCleared", 0);
     }
 
     public void SaveGame()
@@ -68,6 +71,8 @@ public class PlayerHealth : MonoBehaviour
 
         PlayerPrefs.SetFloat("currentXp", xpSystem.currentPlayerXp);
         PlayerPrefs.SetInt("currentLevel", xpSystem.currentPlayerLevel);
+
+        PlayerPrefs.SetInt("levelsCleared", levelsCleared);
     }
 
     void Update()

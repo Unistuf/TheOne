@@ -12,10 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Demo Level.unity
     guid: ab5d96cb84f7cd64b878f3892adfbd6a
   - enabled: 1
+    path: Assets/Scenes/Levels/MainMenu.unity
+    guid: c3f7274f2705f8e448ec8d39b6fe2007
+  - enabled: 1
     path: Assets/Scenes/Levels/GameLevel1.unity
     guid: 41831c4339060d743934375b3e29c60f
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: c3f7274f2705f8e448ec8d39b6fe2007
+    path: Assets/Scenes/Levels/NecromancerBossLevel.unity
+    guid: c5e09a3f26579a2418b7ede4bfd452ae
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e155dd272b9801438225e03d6bd8cff, type: 2}

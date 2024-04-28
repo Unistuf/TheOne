@@ -11,6 +11,7 @@ TagManager:
   - Armour
   - CampfireRadius
   - Parry
+  - Necromancer
   layers:
   - Default
   - TransparentFX

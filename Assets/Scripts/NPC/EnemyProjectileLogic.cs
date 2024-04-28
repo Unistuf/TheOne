@@ -55,17 +55,14 @@ public class EnemyProjectileLogic : MonoBehaviour
     void Update()
     {
         // If we are a homing projectile, start homing
-        if (isHoming)
+        if (isHoming && target != null)
         {
             StartCoroutine(ProjectileHoming());
 
             Vector2 aimDirection = target.transform.position - transform.position;
             angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
 
-            if (target != null)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            }
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
         StartCoroutine(DestroyOverTime());
@@ -110,8 +107,16 @@ public class EnemyProjectileLogic : MonoBehaviour
             }
             else if (target == parentEnemy)
             {
-                target.GetComponent<EnemyHealth>().DoDamage(damage);
-                Destroy(gameObject);
+                if (target.tag == "Necromancer")
+                {
+                    target.GetComponent<NecromancerAI>().DoDamage(damage);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    target.GetComponent<EnemyHealth>().DoDamage(damage);
+                    Destroy(gameObject);
+                }
             }
             
         }

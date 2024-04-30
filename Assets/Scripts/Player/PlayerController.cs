@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(ParryAttack());
                 attackEnabled = false;
-                yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(1f);
                 attackEnabled = true;
             }
             else if (attackID == 3)

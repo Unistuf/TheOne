@@ -50,22 +50,7 @@ public class MeleeAI : MonoBehaviour
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); 
             }
 
-            if (rb.velocity.x >= maxSpeed)
-            {
-                rb.velocity = new Vector2(maxSpeed, rb.velocity.y);//Cap move speed
-            }
-            else if (rb.velocity.x <= -maxSpeed)
-            {
-                rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);//Cap move speed
-            }
-            if (rb.velocity.y >= maxSpeed)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, maxSpeed);//Cap move speed
-            }
-            else if (rb.velocity.y <= -maxSpeed)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, -maxSpeed);//Cap move speed
-            }
+            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed)); // Clamp speed
         }
     }
 

@@ -64,9 +64,11 @@ public class RangedAI : MonoBehaviour
 
         // Look at the target
         if (target != null)
-                {
-                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-                }
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed)); // Clamp speed
     }
 
     IEnumerator DoAttack()

@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Set the time to the elapsed time in the level and format it
         elapsedTime += Time.deltaTime;
         int minutes = Mathf.FloorToInt(elapsedTime / 60);
         int seconds = Mathf.FloorToInt(elapsedTime % 60);

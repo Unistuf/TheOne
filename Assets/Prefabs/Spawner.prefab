@@ -51,4 +51,5 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 4885495403049249818, guid: 18cfdd964e8777740892ec1fc5979ebe, type: 3}
   - {fileID: 4787498873389245740, guid: c11f01fa0316e644188a533795fd8210, type: 3}
+  enemySpawnLimit: 5
   inRange: 5

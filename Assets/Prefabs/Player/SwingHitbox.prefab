@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2569507150181432690}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SwingHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2558413117789861170}
   - component: {fileID: 5935138152150735690}
   - component: {fileID: 3794944865092875513}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SwingSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

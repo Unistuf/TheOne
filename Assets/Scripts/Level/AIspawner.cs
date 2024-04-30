@@ -12,6 +12,7 @@ public class AIspawner : MonoBehaviour
 
     [Header("HOSTILE PREFABS")]
     [SerializeField] GameObject[] enemyPrefabs;
+    [SerializeField] int enemySpawnLimit;
 
 
     public float inRange = 5f;
@@ -19,8 +20,6 @@ public class AIspawner : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-
-        
     }
 
     void Update()
@@ -38,13 +37,14 @@ public class AIspawner : MonoBehaviour
 
     private IEnumerator Spawner()
     {
-        if (canSpawn && !isSpawning)
+        if (canSpawn && !isSpawning && enemySpawnLimit > 0)
         {
             isSpawning = true;
 
             int rand = Random.Range(0, enemyPrefabs.Length);                                // Gets listed Prefabs of Hostiles
             GameObject enemyToSpawn = enemyPrefabs[rand];                                   // Picks randomly what AI to spawn (not random according to Mini max but mini max can stfu)
             Instantiate(enemyToSpawn, transform.position, Quaternion.Euler(0, 0, 0));       // Spawns Hostile within Scene
+            enemySpawnLimit--;                                                              // Decrease remaining spawns
 
             yield return new WaitForSeconds(timeBetweenSpawns);
             isSpawning = false;

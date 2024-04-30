@@ -8,6 +8,7 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Damage either the player or the necromancer depending on which we hit
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<EnemyHealth>().DoDamage(attackDamage);

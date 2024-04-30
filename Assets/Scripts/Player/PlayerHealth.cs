@@ -77,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        // Match the sprite of the HP bar to the fraction of health remaining
         hpPotionText.text = " x " + hpPotion;
         
         if (health <= maxHealth * 0.2f)
@@ -116,9 +117,10 @@ public class PlayerHealth : MonoBehaviour
 
                 // Then check if we are dead
                 if (health <= 0)
-                {   
+                {
                     // Cap our health at 0
                     health = 0;
+
 
                     // Then set ourselves to inactive if we should
                     if (setInactiveOnDeath)
@@ -127,6 +129,8 @@ public class PlayerHealth : MonoBehaviour
                     }
 
                     PlayerPrefs.DeleteAll(); //Delete level persistant data
+
+                    Time.timeScale = 0;
                 }
             }
             else
@@ -168,15 +172,18 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col) 
     {
+        // If we touch a campfire's radius, make the player immortal
         if (col.gameObject.tag == "CampfireRadius")
         {
             isImmortal = true;
         }
+        // Or if we touch a potion, add one to our count and destroy it
         else if (col.gameObject.tag == "HpPotion")
         {
             hpPotion += 1;
             Destroy(col.gameObject);
         }
+        // And ditto for armour if we can pick it up
         else if (col.gameObject.tag == "Armour")
         {
             if (armour < maxArmour)
@@ -187,6 +194,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // Disable immortality on leaving campfire
     public void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == "CampfireRadius")
@@ -195,6 +203,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // Heal ourselves when we use a potion and decrease our count
     public void OnUsePotion(InputAction.CallbackContext context)
     {
         if (context.performed)

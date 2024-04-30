@@ -128,7 +128,7 @@ MonoBehaviour:
   chargingSprite: {fileID: 21300000, guid: 3a5c2a41bfcbe0d4381fd51d1c811d91, type: 3}
   attackingSprite: {fileID: 21300000, guid: 28cc627f41d594a48ab6b00b4d8cec24, type: 3}
   aggroRange: 10
-  movementSpeed: 3
+  movementSpeed: 2
   maxSpeed: 3
   attackRangeMin: 1
   attackRangeMax: 3

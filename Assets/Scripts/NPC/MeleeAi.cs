@@ -38,12 +38,13 @@ public class MeleeAI : MonoBehaviour
             {
                 StartCoroutine(DoAttack());
             }
-            else
+            else // Or if we aren't close enough, move closer
             {
                 float movementStep = movementSpeed / 100;
                 rb.AddForce(aimDirection * movementStep * 10);
             }
 
+            // Look at the target
             if (target != null)
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); 
@@ -57,7 +58,6 @@ public class MeleeAI : MonoBehaviour
             {
                 rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);//Cap move speed
             }
-
             if (rb.velocity.y >= maxSpeed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, maxSpeed);//Cap move speed
@@ -71,6 +71,7 @@ public class MeleeAI : MonoBehaviour
 
     IEnumerator DoAttack()
     {
+        // Lock the coroutine while it's on cooldown
         if (!isAttacking)
         {
             isAttacking = true;

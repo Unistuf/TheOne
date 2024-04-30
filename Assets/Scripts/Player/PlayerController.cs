@@ -223,83 +223,76 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerHealth.isImmortal) // Player cannot attack while immortal
         {
+            // Switch to select attack to initiate
             switch (attackID)
             {
                 case 0:
-
+                    StartCoroutine(ThrustAttack());
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.15f);
+                    attackEnabled = true;
                     break;
                 case 1:
+                    StartCoroutine(SwingAttack(true, 22.5f, 45f));
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.25f);
+                    attackEnabled = true;
+                    break;
+                case 2:
+                    StartCoroutine(ParryAttack());
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(1f);
+                    attackEnabled = true;
+                    break;
+                case 3:
+                    StartCoroutine(SwingAttack(false, 22.5f, 45f));
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.25f);
+                    attackEnabled = true;
+                    break;
+                case 4:
+                    StartCoroutine(SwingAttack(true, -22.5f, 45f));
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.2f);
+                    StartCoroutine(ThrustAttack());
+                    yield return new WaitForSeconds(0.25f);
+                    attackEnabled = true;
+                    break;
+                case 5:
 
                     break;
-            }
+                case 6:
 
-            // Attack IDs
-            if (attackID == 0)
-            {
-                StartCoroutine(ThrustAttack());
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.15f);
-                attackEnabled = true;
-            }
-            else if (attackID == 1)
-            {
-                StartCoroutine(SwingAttack(true, 22.5f, 45f));
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.25f);
-                attackEnabled = true;
-            }
-            else if (attackID == 2)
-            {
-                StartCoroutine(ParryAttack());
-                attackEnabled = false;
-                yield return new WaitForSeconds(1f);
-                attackEnabled = true;
-            }
-            else if (attackID == 3)
-            {
-                StartCoroutine(SwingAttack(false, 22.5f, 45f));
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.25f);
-                attackEnabled = true;
-            }
-            else if (attackID == 4)
-            {
-                StartCoroutine(SwingAttack(true, -22.5f, 45f));
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.2f);
-                StartCoroutine(ThrustAttack());
-                yield return new WaitForSeconds(0.25f);
-                attackEnabled = true;
-            }
-            else if (attackID == 8)
-            {
-                StartCoroutine(SwingAttack(false, -22.5f, 45f));
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.25f);
-                StartCoroutine(SwingAttack(true, -22.5f, 45f));
-                yield return new WaitForSeconds(0.25f);
-                StartCoroutine(SwingAttack(false, -22.5f, 45f));
-                yield return new WaitForSeconds(0.25f);
-                StartCoroutine(ThrustAttack());
-                yield return new WaitForSeconds(0.25f);
-                attackEnabled = true;
-            }
-            else if (attackID == 9)
-            {
-                StartCoroutine(SwingAttack(true, 45f, 360f));
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.25f);
-                attackEnabled = true;
-            }
-            else if (attackID == 10)
-            {
-                StartCoroutine(SwingAttack(false, -45f, 360f));
-                attackEnabled = false;
-                yield return new WaitForSeconds(0.25f);
-                attackEnabled = true;
+                    break;
+                case 7:
+
+                    break;
+                case 8:
+                    StartCoroutine(SwingAttack(false, -22.5f, 45f));
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.25f);
+                    StartCoroutine(SwingAttack(true, -22.5f, 45f));
+                    yield return new WaitForSeconds(0.25f);
+                    StartCoroutine(SwingAttack(false, -22.5f, 45f));
+                    yield return new WaitForSeconds(0.25f);
+                    StartCoroutine(ThrustAttack());
+                    yield return new WaitForSeconds(0.25f);
+                    attackEnabled = true;
+                    break;
+                case 9:
+                    StartCoroutine(SwingAttack(true, 45f, 360f));
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.25f);
+                    attackEnabled = true;
+                    break;
+                case 10:
+                    StartCoroutine(SwingAttack(false, -45f, 360f));
+                    attackEnabled = false;
+                    yield return new WaitForSeconds(0.25f);
+                    attackEnabled = true;
+                    break;
             }
         }
-
         yield return null;
     }
 
@@ -350,11 +343,13 @@ public class PlayerController : MonoBehaviour
     {
         bool isPanelActive = pauseMenuPanel.activeSelf;
 
+        // Open the panel
         if (context.performed)
         {
             pauseMenuPanel.SetActive(!isPanelActive);
         }
 
+        // Freeze/unfreeze game when panel is open
         if (isPanelActive)
         {
             Time.timeScale = 0;

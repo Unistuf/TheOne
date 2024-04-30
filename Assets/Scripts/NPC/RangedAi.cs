@@ -37,9 +37,11 @@ public class RangedAI : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) < aggroRange) //Check if the player is in Aggro range
         {
+            // Calculate the direction to the player/target
             Vector2 aimDirection = player.transform.position - transform.position;
             angle = Mathf.Atan2(-aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;
 
+            // If the player is within attack ranges, start attacking
             if (Vector3.Distance(transform.position, player.transform.position) < attackRangeMax && Vector3.Distance(transform.position, player.transform.position) > attackRangeMin)
             {
                 StartCoroutine(DoAttack());
@@ -60,6 +62,7 @@ public class RangedAI : MonoBehaviour
             }
         }
 
+        // Look at the target
         if (target != null)
                 {
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));

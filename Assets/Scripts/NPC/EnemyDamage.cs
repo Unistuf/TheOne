@@ -13,6 +13,7 @@ public class EnemyDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Apply damage if we hit the player
         if (collision.tag == "Player")
         {
             collision.GetComponent<PlayerHealth>().ApplyDamage(attackDamage);

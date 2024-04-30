@@ -75,6 +75,7 @@ public class MeleeAI : MonoBehaviour
         {
             isAttacking = true;
             GameObject currentAttack = Instantiate(meleeAttack, gameObject.transform, false); //Spawn attack
+            currentAttack.transform.parent = null;
             yield return new WaitForSeconds(1f);
             isAttacking = false;
         }

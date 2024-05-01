@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 4e4a0bdd4479df84d94a9083776e9490, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26edcacf3cab2bd4ba8d698bd2a89d02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   bullet: {fileID: 623865145315103932, guid: a7af4a3913f82054fb405bf5921e3f25, type: 3}
   meleeAi: {fileID: 4885495403049249818, guid: 18cfdd964e8777740892ec1fc5979ebe, type: 3}
   rangedAi: {fileID: 4787498873389245740, guid: c11f01fa0316e644188a533795fd8210, type: 3}
-  defaultSprite: {fileID: 0}
+  defaultSprite: {fileID: 21300000, guid: 26edcacf3cab2bd4ba8d698bd2a89d02, type: 3}
   regularFireSprite: {fileID: 21300000, guid: 4e4a0bdd4479df84d94a9083776e9490, type: 3}
   spinAttackSprite: {fileID: 21300000, guid: 91cc5c46cc60c8d46bcc45f2ca30ab8d, type: 3}
   summoningSprite: {fileID: 21300000, guid: 44fe0024e4e851d4581d10502b79e33d, type: 3}

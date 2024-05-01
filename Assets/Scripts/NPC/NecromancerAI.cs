@@ -45,8 +45,6 @@ public class NecromancerAI : MonoBehaviour
 
     void Start()
     {
-        defaultSprite = regularFireSprite; // temporary until we get a neutral sprite
-
         player = GameObject.Find("Player"); //Get player ref
 
         StartCoroutine(RegularFireCD());
@@ -76,10 +74,11 @@ public class NecromancerAI : MonoBehaviour
 
     IEnumerator RegularFireCD()
     {
+        yield return new WaitForSeconds(fireRate); //Wait for the firerate
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = regularFireSprite;
+
         if (isAggro)//If the player is in range fire a homing bullet
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = regularFireSprite;
-
             EnemyProjectileLogic currentProjectile = Instantiate(bullet, transform.position, Quaternion.identity, this.transform).GetComponent<EnemyProjectileLogic>();
             currentProjectile.target = player;
             currentProjectile.isHoming = true;
@@ -89,19 +88,20 @@ public class NecromancerAI : MonoBehaviour
             shotsFired += 1; //Increase shots fired for the spin attack to trigger
         }
 
+        yield return new WaitForSeconds(fireRate / 3); //Wait for the firerate
+
         if (!isSummoning)
         {
             // Set our sprite back to default before looping
             transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = defaultSprite;
         }
 
-        yield return new WaitForSeconds(fireRate); //Wait for the firerate
         StartCoroutine(RegularFireCD());
     }
 
     IEnumerator SpinAttackCD() //Aoe Attack
     {
-        
+        yield return new WaitForSeconds(0.25f);
 
         if (isAggro && shotsFired >= spinAttackAfterRegularShots) //If player is in range and enough regular shots have been fired to trigger the spin attack
         {
@@ -125,13 +125,15 @@ public class NecromancerAI : MonoBehaviour
             shotsFired = 0; //Reset the amount of shots to trigger this move again
         }
 
+        yield return new WaitForSeconds(fireRate / 3); //Wait for the firerate
+
         if (!isSummoning)
         {
             // Set our sprite back to default before looping
             transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = defaultSprite;
         }
+
         
-        yield return new WaitForSeconds(0.25f);
         StartCoroutine(SpinAttackCD());
     }
 
@@ -157,11 +159,13 @@ public class NecromancerAI : MonoBehaviour
                 }else{
                     Instantiate(rangedAi, spawnPositions[rndSpawn].position, transform.rotation); //Spawn Ranged AI
                 }
-            }
 
-            // Set our sprite back to default before looping
-            isSummoning = false;
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = defaultSprite;
+                // Set our sprite back to default before looping
+                isSummoning = false;
+
+                yield return new WaitForSeconds(fireRate / 3);
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = defaultSprite;
+            }   
         }
         else
         {

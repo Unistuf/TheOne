@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -28,8 +29,9 @@ public class PlayerHealth : MonoBehaviour
     public int levelsCleared;
 
     [Header(("UI"))]
-    public Image healthBarImage;
-    public Image healthSlider;
+    public UnityEngine.UI.Image healthBarImage;
+    public UnityEngine.UI.Image healthSlider;
+    public UnityEngine.UI.Image deathScreen;
     public Sprite[] hpSprites;
 
     // Start is called before the first frame update
@@ -131,6 +133,8 @@ public class PlayerHealth : MonoBehaviour
                     PlayerPrefs.DeleteAll(); //Delete level persistant data
 
                     Time.timeScale = 0;
+
+                    deathScreen.gameObject.SetActive(true);
                 }
             }
             else

@@ -14,8 +14,8 @@ public class RoomProgress : MonoBehaviour
             other.gameObject.GetComponent<PlayerHealth>().levelsCleared++;
             other.gameObject.GetComponent<PlayerHealth>().SaveGame();
 
-            // If the player has cleared a multiple of 5 levels, take them to a boss level
-            if (other.gameObject.GetComponent<PlayerHealth>().levelsCleared % 5 == 0)
+            // If the player has cleared a multiple of 3 levels, take them to a boss level
+            if (other.gameObject.GetComponent<PlayerHealth>().levelsCleared % 3 == 0)
             {
                 SceneManager.LoadScene(bossSceneNumber);
             }
